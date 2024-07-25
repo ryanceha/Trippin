@@ -30,8 +30,8 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               // make front
               margin: const EdgeInsets.only(top: 50),
-              width: 350,
-              height: 175,
+              width: 300,
+              height: 150,
               child: Image.asset('lib/images/title-white.png'),
             ),
             Container(
@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Container(
         width: 350,
         height: 50,
-        margin: const EdgeInsets.only(top: 150),
+        margin: const EdgeInsets.only(top: 80),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF3485FF),
