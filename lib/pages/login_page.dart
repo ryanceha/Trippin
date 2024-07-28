@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:trippin/pages/home_page.dart';
+import 'package:trippin/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -144,7 +144,12 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            },
             child: Text("Sign In",
                 style: TextStyle(
                   fontSize: 20,

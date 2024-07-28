@@ -1,5 +1,5 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,8 +8,44 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   int _currentIndex = 1;
+  // karena dari awal defaultnya di index = 1 which is add button
+  bool _isAddButtonSelected = true;
+  bool _showBottomDrawer = false;
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200),
+    );
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.bounceInOut,
+    );
+  }
+
+  void _toggleDrawer() {
+    setState(() {
+      _showBottomDrawer = !_showBottomDrawer;
+      if (_showBottomDrawer) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,30 +53,66 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color(0xFFEEF5FB),
       body: Stack(
         children: [
-          // Placeholder for content based on the selected index
-          Center(
-            child: Text('Selected Index: $_currentIndex'),
-          ),
-          // Custom background container based on selected index
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color:
-                    _currentIndex == 1 ? Color(0xFF3485FF) : Color(0xFFEEF5FB),
-              ),
+            child: AnimatedBuilder(
+              animation: _animation,
+              builder: (context, child) {
+                return Container(
+                  height: 0 + (_animation.value * 106),
+                  width: 500,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF3485FF),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(10),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 0, left: 16, right: 16, bottom: 50),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            // Handle Recommended button press
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 24.0),
+                          ),
+                          child: Text('Recommended'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Handle New button press
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 50.0),
+                          ),
+                          child: Text('New'),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
-          // CurvedNavigationBar
+          Center(
+            child: Text('Selected Index: $_currentIndex'),
+          ),
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: CurvedNavigationBar(
-              backgroundColor: Color(0xFFEEF5FB),
+              backgroundColor: Colors.transparent,
               index: _currentIndex,
               height: 50,
               items: [
@@ -52,18 +124,37 @@ class _HomePageState extends State<HomePage> {
                     color: _currentIndex == 2 ? Colors.white : Colors.black),
               ],
               onTap: (index) {
-                setState(() {
-                  _currentIndex = index; // Update the current index on tap
-                });
+                if (index == 1) {
+                  if (_isAddButtonSelected) {
+                    _toggleDrawer();
+                  }
+                  setState(() {
+                    _isAddButtonSelected = true;
+                  });
+                  _currentIndex = index;
+                } else {
+                  setState(() {
+                    _currentIndex = index;
+                    _isAddButtonSelected = false;
+                  });
+                  if (_showBottomDrawer) {
+                    _toggleDrawer();
+                  }
+                }
               },
-              animationDuration: Duration(milliseconds: 300),
-              color: Colors.white, // Color of selected item
-              buttonBackgroundColor:
-                  Color(0xFF3485FF), // Background color of items
+              animationDuration: Duration(milliseconds: 200),
+              color: Colors.white,
+              buttonBackgroundColor: Color(0xFF3485FF),
             ),
           ),
         ],
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: HomePage(),
+  ));
 }
