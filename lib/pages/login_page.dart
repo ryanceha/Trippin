@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
         alignment: Alignment.topCenter,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/images/login-bg.png'),
+            image: AssetImage('lib/images/login/login-bg.png'),
             // set the image position top
             alignment: Alignment.topCenter,
           ),
@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
               margin: const EdgeInsets.only(top: 50),
               width: 300,
               height: 150,
-              child: Image.asset('lib/images/title-white.png'),
+              child: Image.asset('lib/images/login/title-white.png'),
             ),
             Container(
               margin: const EdgeInsets.only(top: 40),
