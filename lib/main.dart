@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trippin/pages/home_page.dart';
 import 'package:trippin/pages/splash_page.dart';
 
 void main() {
@@ -13,9 +12,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Tripin',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: SplashScreen(), // Gunakan SplashScreen dari splash.dart

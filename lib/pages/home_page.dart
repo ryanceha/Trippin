@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:trippin/pages/dashboard_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -102,6 +103,20 @@ class _HomePageState extends State<HomePage>
                   ),
                 );
               },
+            ),
+          ),
+          // make a button that links to dashboard page
+          Positioned(
+            top: 50,
+            right: 20,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DashboardPage()),
+                );
+              },
+              child: Text('Dashboard'),
             ),
           ),
           Center(

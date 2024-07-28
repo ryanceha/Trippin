@@ -14,7 +14,8 @@ class SplashScreen extends StatelessWidget {
             height: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("lib/images/bg.png"), // Path yang benar
+                image:
+                    AssetImage("lib/images/splash/bg.png"), // Path yang benar
                 fit: BoxFit.cover,
               ),
             ),
@@ -22,7 +23,7 @@ class SplashScreen extends StatelessWidget {
           // AnimatedSplashScreen
           AnimatedSplashScreen(
             splash: Image.asset(
-              'lib/images/logo.png', // Path yang benar
+              'lib/images/splash/logo.png', // Path yang benar
               width: 800, // Sesuaikan ukuran logo sesuai kebutuhan
               height: 800, // Sesuaikan ukuran logo sesuai kebutuhan
             ),
