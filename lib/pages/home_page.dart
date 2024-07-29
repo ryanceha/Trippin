@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:trippin/pages/dashboard_page.dart';
+import 'package:trippin/pages/recommend/time_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,11 +24,11 @@ class _HomePageState extends State<HomePage>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
+      duration: Duration(milliseconds: 300),
     );
     _animation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.bounceInOut,
+      curve: Curves.easeInOut,
     );
   }
 
@@ -78,7 +79,11 @@ class _HomePageState extends State<HomePage>
                       children: [
                         TextButton(
                           onPressed: () {
-                            // Handle Recommended button press
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RecommendedTimePage()),
+                            );
                           },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
@@ -157,7 +162,7 @@ class _HomePageState extends State<HomePage>
                   }
                 }
               },
-              animationDuration: Duration(milliseconds: 200),
+              animationDuration: Duration(milliseconds: 400),
               color: Colors.white,
               buttonBackgroundColor: Color(0xFF3485FF),
             ),
