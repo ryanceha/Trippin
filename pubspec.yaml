@@ -12,6 +12,8 @@ dependencies:
   flutter_svg: ^1.0.3   
   animated_splash_screen: ^1.2.0  
   curved_navigation_bar: ^1.0.6
+  percent_indicator: ^3.4.0
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
@@ -29,7 +31,9 @@ flutter:
     - lib/images/dashboard/shop.svg
     - lib/images/dashboard/play.svg
     - lib/images/dashboard/food.svg
+    - lib/images/dashboard/
     - lib/images/home/
     - lib/images/login/
     - lib/images/dashboard/album/
+    - lib/images/recommend/
     # kalo ada tambah pages masukin assetsnya disini
