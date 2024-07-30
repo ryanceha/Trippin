@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/activity_detail_page.dart';
 import 'package:trippin/pages/home_page.dart';
+import 'package:trippin/pages/itinerary_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -139,11 +140,11 @@ Widget _itineraryButton(BuildContext context, String name, String imagePath) {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                name == 'Itinerary' ? ActivityDetailPage() : HomePage()),
+                name == 'Itinerary' ? ItineraryPage() : HomePage()),
       );
     },
     child: Container(
-      padding: const EdgeInsets.only(top: 5, bottom: 5, left: 5, right: 10),
+      padding: const EdgeInsets.only(top: 5, bottom: 5, left: 5, right: 15),
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(20),
@@ -167,7 +168,7 @@ Widget _itineraryButton(BuildContext context, String name, String imagePath) {
               ),
             ),
           ),
-          const SizedBox(width: 4),
+          const SizedBox(width: 8),
           Text(
             name,
             style: const TextStyle(
@@ -219,7 +220,7 @@ Widget _mainCard(
                       context,
                       MaterialPageRoute(
                           builder: (context) => title == 'Itinerary'
-                              ? ActivityDetailPage()
+                              ? ItineraryPage()
                               : HomePage()),
                     );
                   },
@@ -504,6 +505,7 @@ Widget _itineraryCard(Color color, String title) {
                               ? 'Makan Gelato'
                               : 'Tiket Masuk Water Blaster',
                       style: TextStyle(
+                        fontFamily: 'Inter',
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -529,6 +531,7 @@ Widget _itineraryCard(Color color, String title) {
                           : title == 'Expense'
                               ? '24 May 2024'
                               : 'You Own Daniel',
+                      style: TextStyle(fontFamily: 'Inter'),
                     ),
                     const SizedBox(width: 8),
                     Text(
