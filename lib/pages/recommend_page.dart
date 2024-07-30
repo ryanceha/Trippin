@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:intl/intl.dart';
-import 'package:trippin/pages/home_page.dart';
+import 'package:trippin/pages/success_page.dart';
 
-class RecommendedTimePage extends StatefulWidget {
-  const RecommendedTimePage({super.key});
+class RecommendPage extends StatefulWidget {
+  const RecommendPage({super.key});
 
   @override
-  State<RecommendedTimePage> createState() => _RecommendedTimePageState();
+  State<RecommendPage> createState() => _RecommendPageState();
 }
 
-class _RecommendedTimePageState extends State<RecommendedTimePage> {
+class _RecommendPageState extends State<RecommendPage> {
   DateTime fromDate = DateTime.now();
   DateTime toDate = DateTime.now();
   DateTimeRange? countDays;
@@ -604,7 +604,8 @@ class _RecommendedTimePageState extends State<RecommendedTimePage> {
                         // head to HomePage()
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
+                          MaterialPageRoute(
+                              builder: (context) => SuccessPage()),
                         );
                       },
                       child: Text("Next",
@@ -637,6 +638,6 @@ class _RecommendedTimePageState extends State<RecommendedTimePage> {
 
 void main() {
   runApp(MaterialApp(
-    home: RecommendedTimePage(),
+    home: RecommendPage(),
   ));
 }

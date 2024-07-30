@@ -36,4 +36,5 @@ flutter:
     - lib/images/login/
     - lib/images/dashboard/album/
     - lib/images/recommend/
+    - lib/images/success/
     # kalo ada tambah pages masukin assetsnya disini
