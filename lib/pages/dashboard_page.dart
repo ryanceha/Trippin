@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/activity_detail_page.dart';
 import 'package:trippin/pages/home_page.dart';
 import 'package:trippin/pages/itinerary_page.dart';
+import 'package:trippin/pages/packing_list.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -93,7 +94,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 _mainCard(
                                     context, 'Billing', Color(0xFF47712D), 1),
                                 const SizedBox(height: 20),
-                                _packinglistCard(),
+                                _packinglistCard(context),
                                 const SizedBox(height: 20),
                                 _albumCard(),
                               ],
@@ -139,8 +140,11 @@ Widget _itineraryButton(BuildContext context, String name, String imagePath) {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                name == 'Itinerary' ? ItineraryPage() : HomePage()),
+            builder: (context) => name == 'Itinerary'
+                ? ItineraryPage()
+                : name == 'Packing List'
+                    ? PackingListScreen()
+                    : HomePage()),
       );
     },
     child: Container(
@@ -253,7 +257,7 @@ Widget _mainCard(
   );
 }
 
-Widget _packinglistCard() {
+Widget _packinglistCard(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(8),
     child: Container(
@@ -284,12 +288,12 @@ Widget _packinglistCard() {
                   ),
                 ),
                 GestureDetector(
-                  // onTap: () {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) => InfoPage()),
-                  //   );
-                  // },
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PackingListScreen()),
+                    );
+                  },
                   child: Image.asset(
                     'lib/images/dashboard/info.png',
                     width: 24,
