@@ -15,7 +15,6 @@ class MainApp extends StatelessWidget {
       title: 'Tripin',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
       ),
       home: SplashScreen(), // Gunakan SplashScreen dari splash.dart
     );
