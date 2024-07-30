@@ -203,7 +203,7 @@ class _RecommendPageState extends State<RecommendPage> {
                       onPrimary: Colors.white,
                     ),
                     highlightColor: Color(0xFF3485FF),
-                    selectedRowColor: Color(0xFF3485FF),
+                    // selectedRowColor: Color(0xFF3485FF),
                     splashColor: Color(0xFF3485FF),
                     buttonTheme: ButtonThemeData(
                       textTheme: ButtonTextTheme.primary,
