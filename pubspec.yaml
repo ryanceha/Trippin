@@ -42,9 +42,19 @@ flutter:
   fonts:
     - family: Inter
       fonts:
-        - asset: fonts/Inter-Regular.ttf
-        - asset: fonts/Inter-Bold.ttf
+        - asset: assets/fonts/Inter-Black.ttf
+        - asset: assets/fonts/Inter-Bold.ttf
           weight: 700
-        - asset: fonts/Inter-Italic.ttf
-          style: italic
+        - asset: assets/fonts/Inter-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Inter-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter-Regular.ttf
+        - asset: assets/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter-Thin.ttf
+          weight: 100
+  
     # kalo ada tambah pages masukin assetsnya disini
