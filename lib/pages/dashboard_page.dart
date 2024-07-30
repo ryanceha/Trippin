@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trippin/pages/activity_detail_page.dart';
+import 'package:trippin/pages/home_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -59,19 +61,19 @@ class _DashboardPageState extends State<DashboardPage> {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: [
-                              _itineraryButton('Itinerary',
+                              _itineraryButton(context, 'Itinerary',
                                   'lib/images/dashboard/list-menu/calendar.svg'),
                               const SizedBox(width: 10), // Gap between buttons
-                              _itineraryButton('Expense',
+                              _itineraryButton(context, 'Expense',
                                   'lib/images/dashboard/list-menu/expense.svg'),
                               const SizedBox(width: 10), // Gap between buttons
-                              _itineraryButton('Billing',
+                              _itineraryButton(context, 'Billing',
                                   'lib/images/dashboard/list-menu/billing.svg'),
                               const SizedBox(width: 10), // Gap between buttons
-                              _itineraryButton('Packing List',
+                              _itineraryButton(context, 'Packing List',
                                   'lib/images/dashboard/list-menu/packing-list.svg'),
                               const SizedBox(width: 10), // Gap between buttons
-                              _itineraryButton('Albums',
+                              _itineraryButton(context, 'Albums',
                                   'lib/images/dashboard/list-menu/albums.svg'),
                             ],
                           ),
@@ -81,11 +83,14 @@ class _DashboardPageState extends State<DashboardPage> {
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                _mainCard('Itinerary', Color(0xFFEFB949), 2),
+                                _mainCard(
+                                    context, 'Itinerary', Color(0xFFEFB949), 2),
                                 const SizedBox(height: 20),
-                                _mainCard('Expense', Color(0xFFE2305F), 1),
+                                _mainCard(
+                                    context, 'Expense', Color(0xFFE2305F), 1),
                                 const SizedBox(height: 20),
-                                _mainCard('Billing', Color(0xFF47712D), 1),
+                                _mainCard(
+                                    context, 'Billing', Color(0xFF47712D), 1),
                                 const SizedBox(height: 20),
                                 _packinglistCard(),
                                 const SizedBox(height: 20),
@@ -121,20 +126,22 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 }
 
-Widget _itineraryButton(String name, String imagePath) {
+Widget _itineraryButton(BuildContext context, String name, String imagePath) {
   return ElevatedButton(
-    onPressed: () {
-      // Navigator.push(
-      // context,
-      // MaterialPageRoute(builder: () => HomePage()),
-      // );
-    },
     style: ElevatedButton.styleFrom(
       backgroundColor: const Color(0xFFEEF5FB),
       elevation: 0,
       padding: const EdgeInsets.all(0),
       minimumSize: Size.zero, // Remove the minimum size constraint
     ),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                name == 'Itinerary' ? ActivityDetailPage() : HomePage()),
+      );
+    },
     child: Container(
       padding: const EdgeInsets.only(top: 5, bottom: 5, left: 5, right: 10),
       decoration: BoxDecoration(
@@ -175,7 +182,8 @@ Widget _itineraryButton(String name, String imagePath) {
   );
 }
 
-Widget _mainCard(String title, Color color, int numberOfItineraries) {
+Widget _mainCard(
+    BuildContext context, String title, Color color, int numberOfItineraries) {
   return Padding(
     padding: const EdgeInsets.all(8),
     child: Container(
@@ -206,12 +214,15 @@ Widget _mainCard(String title, Color color, int numberOfItineraries) {
                   ),
                 ),
                 GestureDetector(
-                  // onTap: () {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) => InfoPage()),
-                  //   );
-                  // },
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => title == 'Itinerary'
+                              ? ActivityDetailPage()
+                              : HomePage()),
+                    );
+                  },
                   child: Image.asset(
                     'lib/images/dashboard/info.png',
                     width: 24,
