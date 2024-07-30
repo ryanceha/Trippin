@@ -33,7 +33,7 @@ flutter:
     - lib/images/dashboard/album/
     - lib/images/recommend/
     - lib/images/success/
-    # - lib/images/activity_detail/
+    - lib/images/activity_detail/
   fonts:
     - family: Inter
       fonts:
