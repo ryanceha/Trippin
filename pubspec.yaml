@@ -24,21 +24,16 @@ flutter:
   uses-material-design: true
   assets:
     - assets/fonts/
-    - lib/images/splash/bg.png
-    - lib/images/splash/logo.png
-    - lib/images/dashboard/back.png
-    - lib/images/dashboard/info.png
+    - lib/images/splash/
+    - lib/images/dashboard/
     - lib/images/dashboard/list-menu/
-    - lib/images/dashboard/shop.svg
-    - lib/images/dashboard/play.svg
-    - lib/images/dashboard/food.svg
     - lib/images/dashboard/
     - lib/images/home/
     - lib/images/login/
     - lib/images/dashboard/album/
     - lib/images/recommend/
     - lib/images/success/
-    - lib/images/activity_detail/
+    # - lib/images/activity_detail/
   fonts:
     - family: Inter
       fonts:

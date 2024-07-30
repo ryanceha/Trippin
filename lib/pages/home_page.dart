@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:trippin/pages/dashboard_page.dart';
-import 'package:trippin/pages/recommend_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,22 +12,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   int _currentIndex = 1;
-  // karena dari awal defaultnya di index = 1 which is add button
   bool _isAddButtonSelected = true;
   bool _showBottomDrawer = false;
   late AnimationController _controller;
   late Animation<double> _animation;
+  final PageController _pageController = PageController(viewportFraction: 1.0);
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: Duration(milliseconds: 200),
     );
     _animation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeInOut,
+      curve: Curves.bounceInOut,
     );
   }
 
@@ -46,6 +45,7 @@ class _HomePageState extends State<HomePage>
   @override
   void dispose() {
     _controller.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -55,6 +55,75 @@ class _HomePageState extends State<HomePage>
       backgroundColor: Color(0xFFEEF5FB),
       body: Stack(
         children: [
+          // Logo and Text
+          Positioned(
+            top: 70,
+            left: 20,
+            right: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'lib/images/home/logo_wrn.png', // Pastikan path gambar benar
+                  height: 50,
+                ),
+                SizedBox(width: 10),
+                Container(
+                  margin: EdgeInsets.only(top: 10), // Margin top 10px
+                  child: Text(
+                    'My Trip',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 40,
+                      fontWeight: FontWeight.w800, // Extra Bold
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Cover Image
+          Positioned(
+            top: 160, // Adjust top position as needed
+            left: 20,
+            right: 20,
+            child: Container(
+              height: 450, // Sesuaikan ukuran height di sini
+              child: PageView(
+                controller: _pageController,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DashboardPage()),
+                      );
+                    },
+                    child: Image.asset(
+                      'lib/images/home/cover.png', // Path to your uploaded image
+                      // fit: BoxFit.cover,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DashboardPage()),
+                      );
+                    },
+                    child: Image.asset(
+                      'lib/images/home/cover2.png', // Path to your second image
+                      // fit: BoxFit.cover,
+                    ),
+                  ),
+                  // Add more images as needed with GestureDetector
+                ],
+              ),
+            ),
+          ),
           Positioned(
             bottom: 0,
             left: 0,
@@ -79,28 +148,7 @@ class _HomePageState extends State<HomePage>
                       children: [
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation, secondaryAnimation) =>
-                                        RecommendPage(),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  const begin = Offset(1.0, 0.0);
-                                  const end = Offset.zero;
-                                  const curve = Curves.ease;
-
-                                  var tween = Tween(begin: begin, end: end)
-                                      .chain(CurveTween(curve: curve));
-
-                                  return SlideTransition(
-                                    position: animation.drive(tween),
-                                    child: child,
-                                  );
-                                },
-                              ),
-                            );
+                            // Handle Recommended button press
                           },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
@@ -127,23 +175,26 @@ class _HomePageState extends State<HomePage>
               },
             ),
           ),
-          // make a button that links to dashboard page
-          Positioned(
-            top: 50,
-            right: 20,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DashboardPage()),
-                );
-              },
-              child: Text('Dashboard'),
-            ),
-          ),
-          Center(
-            child: Text('Selected Index: $_currentIndex'),
-          ),
+          // Button that links to dashboard page
+          // Positioned(
+          //   top: 50,
+          //   right: 20,
+          //   child: Container(
+          //     margin: EdgeInsets.only(top: 40),
+          //     child: ElevatedButton(
+          //       onPressed: () {
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(builder: (context) => DashboardPage()),
+          //         );
+          //       },
+          //       child: Text('Dashboard'),
+          //     ),
+          //   ),
+          // ),
+          // Center(
+          //   child: Text('Selected Index: $_currentIndex'),
+          // ),
           Positioned(
             bottom: 0,
             left: 0,
@@ -179,7 +230,7 @@ class _HomePageState extends State<HomePage>
                   }
                 }
               },
-              animationDuration: Duration(milliseconds: 400),
+              animationDuration: Duration(milliseconds: 200),
               color: Colors.white,
               buttonBackgroundColor: Color(0xFF3485FF),
             ),
