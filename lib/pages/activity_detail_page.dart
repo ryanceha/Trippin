@@ -27,8 +27,8 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    width: 15,
-                    height: 30,
+                    width: 12,
+                    height: 24,
                     child: SvgPicture.asset('lib/images/recommend/back.svg'),
                   ),
                 ),
@@ -37,7 +37,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                   'Activity Detail',
                   style: TextStyle(
                     fontFamily: 'Inter',
-                    fontSize: 28,
+                    fontSize: 24,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -95,9 +95,9 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                             : 'Rp. 4.000',
                     style: TextStyle(
                       fontFamily: 'Inter',
-                      fontSize: 28,
+                      fontSize: 24,
                       color: Colors.black,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 4),
@@ -107,12 +107,12 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                       Center(
                         child: SvgPicture.asset(
                           'lib/images/dashboard/time.svg', // Update this path to your time SVG asset
-                          width: 20,
-                          height: 20,
+                          width: 15,
+                          height: 15,
                           color: Colors.black,
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      const SizedBox(width: 8),
                       Text(
                         title == 'Itinerary'
                             ? '13:00 - 15:00'
@@ -120,19 +120,26 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                                 ? '15:00 - 17:00'
                                 : '18:00 - 19:00',
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Inter',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        title == 'Billing' ? 'IDR 150,000' : '',
+                        title == 'Expense' ? 'IDR 150,000' : '',
                         style: TextStyle(
                           color: Color(0xFF3485FF),
                           fontFamily: 'Inter',
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
+                      ),
+                      Divider(
+                        color: Colors.black, // Customize the color
+                        thickness: 2, // Customize the thickness
+                        indent: 20, // Customize the indent
+                        endIndent: 20, // Customize the end indent
                       ),
                     ],
                   ),

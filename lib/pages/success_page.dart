@@ -56,7 +56,7 @@ class _SuccessPageState extends State<SuccessPage> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(30),
                   ),
                   child: Text("Back to Home",
                       style: TextStyle(

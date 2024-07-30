@@ -118,7 +118,7 @@ class _RecommendPageState extends State<RecommendPage> {
           child: Text(
             "When do you plan to travel?",
             style: TextStyle(
-                fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.w900),
+                fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),
         const SizedBox(height: 30),
@@ -138,7 +138,11 @@ class _RecommendPageState extends State<RecommendPage> {
           child: Text(
             countDays != null ? "${countDays!.duration.inDays} Days" : '',
             style: TextStyle(
-                fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.bold),
+              fontFamily: 'Inter',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF3485FF),
+            ),
           ),
         ),
         const Spacer(),
@@ -152,16 +156,16 @@ class _RecommendPageState extends State<RecommendPage> {
             },
             child: Text("Next",
                 style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Inter',
-                  fontSize: 20,
-                )),
+                    color: Colors.white,
+                    fontFamily: 'Inter',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
               textStyle: TextStyle(fontSize: 16),
               backgroundColor: Color(0xFF3485FF),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(30),
               ),
             ),
           ),
@@ -219,24 +223,25 @@ class _RecommendPageState extends State<RecommendPage> {
           },
           child: Center(
             child: Container(
-              width: 150,
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 2, color: Colors.black),
+                width: 180,
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 2, color: Colors.black),
+                  ),
                 ),
-              ),
-              child: Text(
-                selectedDate != null
-                    ? DateFormat('dd / MMMM / yyyy').format(selectedDate)
-                    : 'DD / MM / YYYY',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
+                child: Center(
+                  child: Text(
+                    selectedDate != null
+                        ? DateFormat('dd / MMMM / yyyy').format(selectedDate)
+                        : 'DD / MM / YYYY',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600),
+                  ),
+                )),
           ),
         ),
       ],
@@ -250,7 +255,7 @@ class _RecommendPageState extends State<RecommendPage> {
         Text(
           "How far are we going ?",
           style: TextStyle(
-              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.w900),
+              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 30),
         Row(
@@ -311,7 +316,7 @@ class _RecommendPageState extends State<RecommendPage> {
                   style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 18,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
               ),
@@ -353,7 +358,7 @@ class _RecommendPageState extends State<RecommendPage> {
         Text(
           "Where do you want to go?",
           style: TextStyle(
-              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.w900),
+              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 30),
         Center(
@@ -430,16 +435,16 @@ class _RecommendPageState extends State<RecommendPage> {
             },
             child: Text("Next",
                 style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Inter',
-                  fontSize: 20,
-                )),
+                    color: Colors.white,
+                    fontFamily: 'Inter',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
               textStyle: TextStyle(fontSize: 16),
               backgroundColor: Color(0xFF3485FF),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(30),
               ),
             ),
           ),
@@ -456,7 +461,7 @@ class _RecommendPageState extends State<RecommendPage> {
           "What kind of activity do you want to do in this trip?",
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.w900),
+              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 30),
         Row(
@@ -482,7 +487,7 @@ class _RecommendPageState extends State<RecommendPage> {
         Text(
           "Which one do you prefer?",
           style: TextStyle(
-              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.w900),
+              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 30),
         Row(
@@ -508,7 +513,7 @@ class _RecommendPageState extends State<RecommendPage> {
         Text(
           "Do you like to go culinary?",
           style: TextStyle(
-              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.w900),
+              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 30),
         Row(
@@ -550,7 +555,7 @@ class _RecommendPageState extends State<RecommendPage> {
         Text(
           "Do you like to go culinary?",
           style: TextStyle(
-              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.w900),
+              fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 30),
         Expanded(
@@ -583,10 +588,11 @@ class _RecommendPageState extends State<RecommendPage> {
                 children: [
                   Text(
                     "How much do you want to spend for this trip?",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 24,
-                        fontWeight: FontWeight.w900),
+                        fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 30),
                   TextField(
@@ -613,6 +619,7 @@ class _RecommendPageState extends State<RecommendPage> {
                             color: Colors.white,
                             fontFamily: 'Inter',
                             fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           )),
                       style: ElevatedButton.styleFrom(
                         padding:
@@ -620,7 +627,7 @@ class _RecommendPageState extends State<RecommendPage> {
                         textStyle: TextStyle(fontSize: 16),
                         backgroundColor: Color(0xFF3485FF),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(30),
                         ),
                       ),
                     ),
