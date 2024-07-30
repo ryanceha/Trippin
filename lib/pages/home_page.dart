@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:trippin/pages/dashboard_page.dart';
+import 'package:trippin/pages/recommend_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage>
         children: [
           // Logo and Text
           Positioned(
-            top: 70,
+            top: 30,
             left: 20,
             right: 20,
             child: Row(
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage>
           ),
           // Cover Image
           Positioned(
-            top: 160, // Adjust top position as needed
+            top: 120, // Adjust top position as needed
             left: 20,
             right: 20,
             child: Container(
@@ -149,6 +150,10 @@ class _HomePageState extends State<HomePage>
                         TextButton(
                           onPressed: () {
                             // Handle Recommended button press
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RecommendPage()));
                           },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,

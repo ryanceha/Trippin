@@ -348,7 +348,10 @@ Widget _customCheckboxListTile(String title, bool value) {
       ),
       title: Text(
         title,
-        style: TextStyle(fontSize: 14), // Adjust the font size as needed
+        style: TextStyle(
+            fontSize: 16,
+            fontFamily: 'Inter',
+            color: Colors.black), // Adjust the font size as needed
       ),
       dense: true, // This reduces the height of the ListTile
     ),
