@@ -34,6 +34,7 @@ flutter:
     - lib/images/recommend/
     - lib/images/success/
     - lib/images/activity_detail/
+    - lib/images/add_activity/
   fonts:
     - family: Inter
       fonts:

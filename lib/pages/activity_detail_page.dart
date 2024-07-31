@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trippin/pages/add_activity.dart';
 import 'package:trippin/pages/itinerary_page.dart';
 
 class ActivityDetailPage extends StatefulWidget {
@@ -61,7 +62,13 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                               30.0), // Adjust border radius
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddActivity()),
+                        );
+                      },
                       child: Text(
                         'Create Split Bill',
                         style: TextStyle(
@@ -95,7 +102,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ItineraryPage()),
+                              builder: (context) => AddActivity()),
                         );
                       },
                     ),

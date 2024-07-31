@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:trippin/pages/activity_detail_page.dart';
 import 'package:trippin/pages/home_page.dart';
 import 'package:trippin/pages/itinerary_page.dart';
 import 'package:trippin/pages/packing_list.dart';
