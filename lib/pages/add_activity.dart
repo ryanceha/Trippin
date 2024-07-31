@@ -18,7 +18,7 @@ class _AddActivityState extends State<AddActivity> {
   TimeOfDay? _startTime;
   TimeOfDay? _endTime;
   Color? _selectedColor;
-  IconData? _selectedIcon;
+  String? _selectedIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +135,7 @@ class _AddActivityState extends State<AddActivity> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Color(0xFF3485FF),
         child: SvgPicture.asset(
           'lib/images/add_activity/check.svg',
           color: Colors.white,
@@ -309,16 +309,16 @@ class _AddActivityState extends State<AddActivity> {
   }
 
   Widget _iconPicker() {
-    List<IconData> icons = [
-      Icons.music_note,
-      Icons.lock,
-      Icons.local_dining,
-      Icons.camera_alt,
-      Icons.map,
-      Icons.edit
+    List<String> icons = [
+      'lib/images/add_activity/route.svg',
+      'lib/images/add_activity/shop.svg',
+      'lib/images/add_activity/food.svg',
+      'lib/images/add_activity/indoor.svg',
+      'lib/images/add_activity/outdoor.svg',
+      'lib/images/add_activity/play.svg',
     ];
     return Wrap(
-      spacing: 10,
+      spacing: 20,
       children: icons.map((icon) {
         return GestureDetector(
           onTap: () {
@@ -338,9 +338,10 @@ class _AddActivityState extends State<AddActivity> {
                 width: 2,
               ),
             ),
-            child: Icon(
+            child: SvgPicture.asset(
               icon,
-              size: 24,
+              width: 24,
+              height: 24,
               color: _selectedIcon == icon ? Color(0xFF3485FF) : Colors.grey,
             ),
           ),

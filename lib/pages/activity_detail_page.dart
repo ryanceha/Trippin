@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/add_activity.dart';
-import 'package:trippin/pages/itinerary_page.dart';
 
 class ActivityDetailPage extends StatefulWidget {
   const ActivityDetailPage({super.key});
