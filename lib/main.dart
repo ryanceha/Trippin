@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trippin/pages/billing_detail_page.dart';
 import 'package:trippin/pages/splash_page.dart';
-import 'package:trippin/pages/split_billing_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -18,7 +16,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: BillingDetail(), // Gunakan SplashScreen dari splash.dart
+      home: SplashScreen(), // Gunakan SplashScreen dari splash.dart
     );
   }
 }
