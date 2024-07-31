@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/activity_detail_page.dart';
+import 'package:trippin/pages/add_activity.dart';
 
 class ItineraryPage extends StatefulWidget {
   const ItineraryPage({super.key});
@@ -117,8 +118,7 @@ class _ItineraryPageState extends State<ItineraryPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => ActivityDetailPage()),
+                      MaterialPageRoute(builder: (context) => AddActivity()),
                     );
                   },
                   child: Text(
@@ -231,110 +231,127 @@ class _ItineraryPageState extends State<ItineraryPage> {
     required IconData icon,
     required Color color,
   }) {
-    return Container(
-      margin: EdgeInsets.only(top: 10), // Add top margin of 10 pixels
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 2,
-            spreadRadius: 2,
-            offset: Offset(0, 2), // Add offset to the shadow
-          ),
-        ],
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16),
-          bottomLeft: Radius.circular(16),
-        ),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 15,
-            height: 110,
-            decoration: BoxDecoration(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ActivityDetailPage(
+              title: title,
+              location: location,
+              time: time,
+              icon: icon,
               color: color,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                bottomLeft: Radius.circular(16),
-              ),
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Center(
-                        child: Icon(
-                          icon,
-                          size: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(
-                          width:
-                              6), // Add some spacing between the icon and text
-                      Text(
-                        title,
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 4),
-                  Row(
-                    children: [
-                      Center(
-                        child: Icon(
-                          Icons.location_on,
-                          size: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(width: 6),
-                      Text(
-                        location,
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Divider(color: Colors.black), // Add a horizontal line
-                  Row(
-                    children: [
-                      Center(
-                        child: Icon(
-                          Icons.access_time,
-                          size: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(width: 6),
-                      Text(
-                        time,
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 10), // Add top margin of 10 pixels
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 2,
+              spreadRadius: 2,
+              offset: Offset(0, 2), // Add offset to the shadow
+            ),
+          ],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            bottomLeft: Radius.circular(16),
+          ),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 15,
+              height: 110,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  bottomLeft: Radius.circular(16),
+                ),
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Center(
+                          child: Icon(
+                            icon,
+                            size: 16,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(
+                            width:
+                                6), // Add some spacing between the icon and text
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Center(
+                          child: Icon(
+                            Icons.location_on,
+                            size: 16,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        Text(
+                          location,
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(color: Colors.black), // Add a horizontal line
+                    Row(
+                      children: [
+                        Center(
+                          child: Icon(
+                            Icons.access_time,
+                            size: 16,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        Text(
+                          time,
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -345,3 +362,76 @@ void main() {
     home: ItineraryPage(),
   ));
 }
+
+// class ActivityDetailPage extends StatelessWidget {
+//   final String title;
+//   final String location;
+//   final String time;
+//   final IconData icon;
+//   final Color color;
+
+//   const ActivityDetailPage({
+//     Key? key,
+//     required this.title,
+//     required this.location,
+//     required this.time,
+//     required this.icon,
+//     required this.color,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(title),
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Row(
+//               children: [
+//                 Icon(icon, size: 32.0, color: color),
+//                 const SizedBox(width: 16),
+//                 Text(
+//                   title,
+//                   style: TextStyle(
+//                     fontSize: 24,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             const SizedBox(height: 16),
+//             Row(
+//               children: [
+//                 Icon(Icons.location_on, size: 24.0, color: Colors.black),
+//                 const SizedBox(width: 16),
+//                 Text(
+//                   location,
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             const SizedBox(height: 16),
+//             Row(
+//               children: [
+//                 Icon(Icons.access_time, size: 24.0, color: Colors.black),
+//                 const SizedBox(width: 16),
+//                 Text(
+//                   time,
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

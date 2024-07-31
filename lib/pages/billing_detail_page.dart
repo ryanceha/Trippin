@@ -376,7 +376,7 @@ class _BillingDetailState extends State<BillingDetail>
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          primary: Color(0xFF3485FF),
+          // primary: Color(0xFF3485FF),
         ),
         child: Center(
           child: Text(
