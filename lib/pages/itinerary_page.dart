@@ -149,10 +149,14 @@ class _ItineraryPageState extends State<ItineraryPage> {
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: ListView(
-                children: [
-                  ..._buildItineraryCards(selectedDate),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 10.0), // Adjust padding
+                child: ListView(
+                  children: [
+                    ..._buildItineraryCards(selectedDate),
+                  ],
+                ),
               ),
             ),
           ],
@@ -214,12 +218,15 @@ class _ItineraryPageState extends State<ItineraryPage> {
     if (itineraryForDate == null) return [];
 
     return itineraryForDate.map((itinerary) {
-      return _buildItineraryCard(
-        title: itinerary['title'],
-        location: itinerary['location'],
-        time: itinerary['time'],
-        icon: itinerary['icon'],
-        color: itinerary['color'],
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4),
+        child: _buildItineraryCard(
+          title: itinerary['title'],
+          location: itinerary['location'],
+          time: itinerary['time'],
+          icon: itinerary['icon'],
+          color: itinerary['color'],
+        ),
       );
     }).toList();
   }
@@ -249,20 +256,18 @@ class _ItineraryPageState extends State<ItineraryPage> {
       child: Container(
         margin: EdgeInsets.only(top: 10), // Add top margin of 10 pixels
         decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 2,
-              spreadRadius: 2,
-              offset: Offset(0, 2), // Add offset to the shadow
-            ),
-          ],
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(16),
-            bottomLeft: Radius.circular(16),
-          ),
-        ),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 2,
+                spreadRadius: 2,
+                offset: Offset(0, 2), // Add offset to the shadow
+              ),
+            ],
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            )),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -362,76 +367,3 @@ void main() {
     home: ItineraryPage(),
   ));
 }
-
-// class ActivityDetailPage extends StatelessWidget {
-//   final String title;
-//   final String location;
-//   final String time;
-//   final IconData icon;
-//   final Color color;
-
-//   const ActivityDetailPage({
-//     Key? key,
-//     required this.title,
-//     required this.location,
-//     required this.time,
-//     required this.icon,
-//     required this.color,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(title),
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Row(
-//               children: [
-//                 Icon(icon, size: 32.0, color: color),
-//                 const SizedBox(width: 16),
-//                 Text(
-//                   title,
-//                   style: TextStyle(
-//                     fontSize: 24,
-//                     fontWeight: FontWeight.bold,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             const SizedBox(height: 16),
-//             Row(
-//               children: [
-//                 Icon(Icons.location_on, size: 24.0, color: Colors.black),
-//                 const SizedBox(width: 16),
-//                 Text(
-//                   location,
-//                   style: TextStyle(
-//                     fontSize: 18,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             const SizedBox(height: 16),
-//             Row(
-//               children: [
-//                 Icon(Icons.access_time, size: 24.0, color: Colors.black),
-//                 const SizedBox(width: 16),
-//                 Text(
-//                   time,
-//                   style: TextStyle(
-//                     fontSize: 18,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

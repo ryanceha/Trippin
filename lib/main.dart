@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trippin/pages/add_trip_page.dart';
 import 'package:trippin/pages/splash_page.dart';
-import 'package:trippin/pages/split_billing_page.dart';
 
 void main() {
   runApp(const MainApp());

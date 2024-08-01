@@ -327,8 +327,9 @@ class _AddActivityState extends State<AddActivity> {
             });
           },
           child: Container(
-            width: 36,
-            height: 36,
+            width: 40,
+            height: 40,
+            padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
