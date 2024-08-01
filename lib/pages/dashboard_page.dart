@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trippin/pages/expense_page.dart';
 import 'package:trippin/pages/home_page.dart';
 import 'package:trippin/pages/itinerary_page.dart';
 import 'package:trippin/pages/packing_list.dart';
@@ -141,9 +142,11 @@ Widget _itineraryButton(BuildContext context, String name, String imagePath) {
         MaterialPageRoute(
             builder: (context) => name == 'Itinerary'
                 ? ItineraryPage()
-                : name == 'Packing List'
-                    ? PackingListScreen()
-                    : HomePage()),
+                : name == 'Expense'
+                    ? ExpensePage()
+                    : name == 'Packing List'
+                        ? PackingListScreen()
+                        : HomePage()),
       );
     },
     child: Container(
@@ -224,7 +227,11 @@ Widget _mainCard(
                       MaterialPageRoute(
                           builder: (context) => title == 'Itinerary'
                               ? ItineraryPage()
-                              : HomePage()),
+                              : title == 'Expense'
+                                  ? ExpensePage()
+                                  : title == 'Packing List'
+                                      ? PackingListScreen()
+                                      : HomePage()),
                     );
                   },
                   child: Image.asset(
@@ -290,7 +297,8 @@ Widget _packinglistCard(BuildContext context) {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PackingListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => PackingListScreen()),
                     );
                   },
                   child: Image.asset(
