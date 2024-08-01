@@ -3,7 +3,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/add_activity.dart';
 
 class ActivityDetailPage extends StatefulWidget {
-  const ActivityDetailPage({super.key});
+  final String title;
+  final String location;
+  final String time;
+  final IconData icon;
+  final Color color;
+
+  const ActivityDetailPage({
+    Key? key,
+    required this.title,
+    required this.location,
+    required this.time,
+    required this.icon,
+    required this.color,
+  }) : super(key: key);
 
   @override
   State<ActivityDetailPage> createState() => _ActivityDetailPageState();
@@ -13,109 +26,112 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    width: 12,
-                    height: 24,
-                    child: SvgPicture.asset('lib/images/recommend/back.svg'),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Text(
-                  'Activity Detail',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontSize: 24,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 30),
-            _detailCard(Color(0xFFE2305F), "Makan Siang"),
-            const Spacer(),
-            Center(
-              child: Row(
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32.0),
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  Container(
-                    height: 50, // Adjust height as needed
-                    width: 300, // Adjust width as needed
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF3485FF),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              30.0), // Adjust border radius
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AddActivity()),
-                        );
-                      },
-                      child: Text(
-                        'Create Split Bill',
-                        style: TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 18, // Adjust font size as needed
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                        softWrap: false,
-                        overflow: TextOverflow
-                            .ellipsis, // Prevents the text from breaking
-                      ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      width: 12,
+                      height: 24,
+                      child: SvgPicture.asset('lib/images/recommend/back.svg'),
                     ),
                   ),
-                  // make a button that consists of a circle button
-                  Container(
-                    height: 50, // Adjust height as needed
-                    width: 50, // Adjust width as needed
-                    padding: const EdgeInsets.all(4),
-                    margin: const EdgeInsets.only(left: 20),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF3485FF),
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      icon: SvgPicture.asset(
-                        'lib/images/activity_detail/edit.svg',
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AddActivity()),
-                        );
-                      },
+                  const SizedBox(width: 20),
+                  Text(
+                    'Activity Detail',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
+              const SizedBox(height: 30),
+              _detailCard(
+                  widget.color, widget.title, widget.location, widget.time),
+              const Spacer(),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 50, // Adjust height as needed
+                      width: 300, // Adjust width as needed
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF3485FF),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                30.0), // Adjust border radius
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddActivity()),
+                          );
+                        },
+                        child: Text(
+                          'Create Split Bill',
+                          style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 18, // Adjust font size as needed
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                          softWrap: false,
+                          overflow: TextOverflow
+                              .ellipsis, // Prevents the text from breaking
+                        ),
+                      ),
+                    ),
+                    // make a button that consists of a circle button
+                    Container(
+                      height: 50, // Adjust height as needed
+                      width: 50, // Adjust width as needed
+                      padding: const EdgeInsets.all(4),
+                      margin: const EdgeInsets.only(left: 20),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF3485FF),
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        icon: SvgPicture.asset(
+                          'lib/images/activity_detail/edit.svg',
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddActivity()),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 
-  Widget _detailCard(Color color, String title) {
+  Widget _detailCard(Color color, String title, String location, String time) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -150,11 +166,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title == 'Makan Siang'
-                        ? 'Rp. 500.000'
-                        : title == 'Makan Malam'
-                            ? 'Rp. 1.200.000'
-                            : 'Rp. 4.000',
+                    title,
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 24,
@@ -176,25 +188,11 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        title == 'Itinerary'
-                            ? '13:00 - 15:00'
-                            : title == 'Expense'
-                                ? '15:00 - 17:00'
-                                : '18:00 - 19:00',
+                        time,
                         style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 18,
                           fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        title == 'Expense' ? 'IDR 150,000' : '',
-                        style: TextStyle(
-                          color: Color(0xFF3485FF),
-                          fontFamily: 'Inter',
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -210,7 +208,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '• Claypot Popo (makan siang)',
+                        '• $location (makan siang)',
                         style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 16,
@@ -268,4 +266,16 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: ActivityDetailPage(
+      title: "Makan Siang",
+      location: "Claypot Popo",
+      time: "12:00 - 13:00",
+      icon: Icons.restaurant,
+      color: Color(0xFF47712D),
+    ),
+  ));
 }
