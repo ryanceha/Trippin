@@ -36,7 +36,9 @@ flutter:
     - lib/images/activity_detail/
     - lib/images/add_activity/
     - lib/images/split_billing/
+    - lib/images/billing/
     - lib/images/expense/
+
   fonts:
     - family: Inter
       fonts:
