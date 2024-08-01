@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:trippin/pages/add_trip_page.dart';
 import 'package:trippin/pages/dashboard_page.dart';
 import 'package:trippin/pages/recommend_page.dart';
 
@@ -164,7 +165,10 @@ class _HomePageState extends State<HomePage>
                         ),
                         TextButton(
                           onPressed: () {
-                            // Handle New button press
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddTripPage()));
                           },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
