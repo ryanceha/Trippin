@@ -223,7 +223,7 @@ class _RecommendPageState extends State<RecommendPage> {
           },
           child: Center(
             child: Container(
-                width: 180,
+                width: 200,
                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 decoration: BoxDecoration(
                   border: Border(
