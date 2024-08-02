@@ -33,6 +33,8 @@ flutter:
     - lib/images/dashboard/album/
     - lib/images/recommend/
     - lib/images/success/
+    - lib/images/gallery/
+    - lib/images/details_images/
     - lib/images/activity_detail/
     - lib/images/add_activity/
     - lib/images/split_billing/

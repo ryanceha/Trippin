@@ -28,7 +28,13 @@ class PackingListBody extends StatefulWidget {
 
 class _PackingListBodyState extends State<PackingListBody> {
   List<Map<String, dynamic>> items = [
-    {'name': 'Kaos Kaki', 'checked': false}
+    {'name': 'Passport', 'checked': true},
+    {'name': 'Tickets', 'checked': true},
+    {'name': 'Sunglasses', 'checked': false},
+    {'name': 'Clothes', 'checked': false},
+    {'name': 'Toiletries', 'checked': false},
+    {'name': 'Camera', 'checked': false},
+    {'name': 'Charger', 'checked': false}
   ];
 
   void _addItem(String itemName) {
@@ -106,7 +112,7 @@ class _PackingListBodyState extends State<PackingListBody> {
           Text(
             'Surabaya',
             style: TextStyle(
-                fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Inter'),
+                fontSize: 28, fontWeight: FontWeight.bold, fontFamily: 'Inter'),
           ),
           ListView.builder(
             shrinkWrap: true,
