@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trippin/pages/split_billing_page.dart';
 
 class EditBill extends StatefulWidget {
   const EditBill({super.key});
@@ -9,10 +10,11 @@ class EditBill extends StatefulWidget {
 }
 
 class _EditBillState extends State<EditBill> {
+  // name bill text editing controller
+  TextEditingController _nameController = TextEditingController();
+
   final List<Map<String, dynamic>> items = [
     {"name": "Bebek Panggang", "price": 150000, "quantity": 3},
-    {"name": "", "price": 0, "quantity": 0},
-    {"name": "", "price": 0, "quantity": 0},
     {"name": "", "price": 0, "quantity": 0},
   ];
 
@@ -54,7 +56,7 @@ class _EditBillState extends State<EditBill> {
                 ],
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 20, top: 16),
+                padding: EdgeInsets.only(left: 20, top: 5),
                 child: Text(
                   "You can edit the title, amount and price of each item",
                   textAlign: TextAlign.start,
@@ -66,8 +68,12 @@ class _EditBillState extends State<EditBill> {
                 ),
               ),
               const SizedBox(height: 24),
-              for (var item in items) buildItemRow(item),
+              _inputField("Bill Name", _nameController),
               const SizedBox(height: 16),
+              Divider(),
+              const SizedBox(height: 16),
+              for (var item in items) buildItemRow(item),
+              const SizedBox(height: 8),
               ElevatedButton(
                 onPressed: () {
                   setState(() {
@@ -75,7 +81,7 @@ class _EditBillState extends State<EditBill> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 40),
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
                   backgroundColor: Color(0xFF3485FF),
                 ),
                 child: const Text(
@@ -84,10 +90,30 @@ class _EditBillState extends State<EditBill> {
                       fontFamily: 'Inter',
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
-                      fontSize: 12),
+                      fontSize: 14),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 8),
+              Divider(
+                color: Color(0xFF9C9C9C),
+                thickness: 0.75,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 5, top: 8, bottom: 8),
+                child: Text(
+                  "Summary",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Inter',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Divider(
+                color: Color(0xFF9C9C9C),
+                thickness: 0.75,
+              ),
+              const SizedBox(height: 4),
               buildSummaryRow('Subtotal', subtotal),
               buildSummaryRow('Tax', 0),
               buildSummaryRow('Service charge', 0),
@@ -97,22 +123,32 @@ class _EditBillState extends State<EditBill> {
               buildSummaryRow('Total amount', totalAmount),
               const SizedBox(height: 32),
               Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Handle confirm result action
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                    backgroundColor: Color(0xFF3485FF),
-                    textStyle: TextStyle(fontSize: 16),
-                  ),
-                  child: const Text(
-                    'Confirm Result',
-                    style: TextStyle(
-                        fontFamily: 'Inter',
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12),
+                child: Container(
+                  width: 350,
+                  height: 50,
+                  child: ElevatedButton(
+                    // border radius
+
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SplitBilling()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 32),
+                      backgroundColor: Color(0xFF3485FF),
+                      textStyle: TextStyle(fontSize: 16),
+                    ),
+                    child: const Text(
+                      'Confirm Result',
+                      style: TextStyle(
+                          fontFamily: 'Inter',
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
                   ),
                 ),
               ),
@@ -132,62 +168,130 @@ class _EditBillState extends State<EditBill> {
         TextEditingController(text: item['quantity'].toString());
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Row(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
-            child: _inputField(
-              'Item name',
-              nameController,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: _inputField(
+                  'Item name',
+                  nameController,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    items.remove(item);
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Container(
+                    width: 20, // Ensure the container has a size
+                    height: 20,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: SvgPicture.asset(
+                      'lib/images/edit_bill/delete.svg',
+                      color: Colors.grey,
+                      width: 15,
+                      height: 15,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: _inputField(
-              'Price',
-              priceController,
-            ),
-          ),
-          const SizedBox(width: 8),
-          Text('x', style: TextStyle(fontSize: 24)),
-          const SizedBox(width: 8),
-          Expanded(
-            child: _inputField(
-              'Quantity',
-              quantityController,
-            ),
-          ),
-          const SizedBox(width: 8),
-          Text('='),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              (item['price'] * item['quantity']).toString(),
-              style: TextStyle(fontSize: 18),
-            ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                flex: 3,
+                child: _inputNumberField(
+                  'Price',
+                  priceController,
+                ),
+              ),
+              const SizedBox(width: 100),
+              Text('x',
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.bold)),
+              const SizedBox(width: 8),
+              Flexible(
+                flex: 1,
+                child: _inputNumberField(
+                  'Quantity',
+                  quantityController,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                flex: 2,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 6, horizontal: 15),
+                  width: 200,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 0.75),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Text(
+                    (item['price'] * item['quantity']).toString(),
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Widget _inputField(String hintText, TextEditingController controller,
-      {bool isPassword = false}) {
+  Widget _inputField(String hintText, TextEditingController controller) {
     var border = OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: const BorderSide(color: Color(0xFF9C9C9C)));
+        borderRadius: BorderRadius.circular(30),
+        borderSide: const BorderSide(color: Color(0xFF9C9C9C), width: 0.5));
     return TextField(
-      style: const TextStyle(color: Colors.black, fontFamily: 'Inter'),
+      style: const TextStyle(
+          color: Colors.black, fontFamily: 'Inter', fontSize: 12),
       controller: controller,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.only(left: 15),
+        isDense: true,
+        contentPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 15),
         hintText: hintText,
         hintStyle: const TextStyle(
-            color: Color(0xFF9C9C9C), fontFamily: 'Inter', fontSize: 16),
+            color: Color(0xFF9C9C9C), fontFamily: 'Inter', fontSize: 12),
         enabledBorder: border,
         focusedBorder: border,
       ),
-      obscureText: isPassword,
+    );
+  }
+
+  Widget _inputNumberField(String hintText, TextEditingController controller) {
+    var border = OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30),
+        borderSide: const BorderSide(color: Color(0xFF9C9C9C), width: 0.5));
+    return TextField(
+      keyboardType: TextInputType.number,
+      style: const TextStyle(
+          color: Colors.black, fontFamily: 'Inter', fontSize: 12),
+      controller: controller,
+      decoration: InputDecoration(
+        isDense: true,
+        contentPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 15),
+        hintText: hintText,
+        hintStyle: const TextStyle(
+            color: Color(0xFF9C9C9C), fontFamily: 'Inter', fontSize: 12),
+        enabledBorder: border,
+        focusedBorder: border,
+      ),
     );
   }
 
@@ -199,11 +303,19 @@ class _EditBillState extends State<EditBill> {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.w400),
           ),
-          Text(
-            amount.toString(),
-            style: TextStyle(fontSize: 18),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 15),
+            width: 120,
+            decoration: BoxDecoration(
+                border: Border.all(color: Color(0xFF9C9C9C), width: 0.5),
+                borderRadius: BorderRadius.circular(30)),
+            child: Text(
+              amount.toString(),
+              style: TextStyle(fontSize: 14),
+            ),
           ),
         ],
       ),
