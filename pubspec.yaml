@@ -41,6 +41,8 @@ flutter:
     - lib/images/split_billing/
     - lib/images/billing/
     - lib/images/expense/
+    - lib/images/profile/
+    - lib/images/scan_bill/
 
   fonts:
     - family: Inter

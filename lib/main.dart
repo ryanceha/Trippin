@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trippin/pages/profile_page.dart';
 import 'package:trippin/pages/splash_page.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: SplashScreen(), // Gunakan SplashScreen dari splash.dart
+      home: ProfilePage(), // Gunakan SplashScreen dari splash.dart
     );
   }
 }
