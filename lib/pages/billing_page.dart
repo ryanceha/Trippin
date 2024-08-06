@@ -19,11 +19,9 @@ class _BillingPageState extends State<BillingPage> {
       "icon": Icons.shopping_bag,
       "color": Color(0xFFEFB949),
       "userImages": [
-        'https://example.com/image1.png',
-        'https://example.com/image2.png',
-        'https://example.com/image3.png',
-        'https://example.com/image4.png',
-        'https://example.com/image5.png',
+        'lib/images/split_billing/aryo.png',
+        'lib/images/split_billing/ruth.png',
+        'lib/images/split_billing/grace.png',
       ],
     },
     // Add other itineraries here...
@@ -365,8 +363,8 @@ class _BillingPageState extends State<BillingPage> {
       },
       child: Container(
         margin: const EdgeInsets.only(top: 16.0, right: 10.0),
-        padding: const EdgeInsets.only(
-            top: 15.0, left: 15.0, right: 15.0, bottom: 15.0),
+        // padding: const EdgeInsets.only(
+        //     top: 15.0, left: 15.0, right: 15.0, bottom: 15.0),
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -377,17 +375,15 @@ class _BillingPageState extends State<BillingPage> {
               offset: Offset(0, 2), // Add offset to the shadow
             ),
           ],
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(16),
-            bottomLeft: Radius.circular(16),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         child: Row(
           children: [
             Container(
-              width: 12,
+              height: 150,
+              width: 10,
               decoration: BoxDecoration(
-                color: Colors.red, // Use the color parameter here
+                color: Color(0xFF3485FF),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(16),
                   bottomLeft: Radius.circular(16),
@@ -396,66 +392,91 @@ class _BillingPageState extends State<BillingPage> {
             ),
             const SizedBox(width: 10),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Inter',
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 15.0, left: 5.0, right: 15.0, bottom: 15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          title,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Inter',
+                          ),
+                        ),
+                        Row(
+                          children: userImages.map((imageUrl) {
+                            return Container(
+                              margin: const EdgeInsets.only(left: 4.0),
+                              child: CircleAvatar(
+                                radius: 12,
+                                backgroundImage: AssetImage(imageUrl),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      date,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Inter',
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      amountOwed,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Inter',
+                      ),
+                    ),
+                    const Divider(
+                      color: Colors.black,
+                      thickness: 1,
+                      height: 20,
+                    ),
+                    Text(
+                      itemsPersons,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Inter',
+                      ),
+                    ),
+                    Spacer(),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Tambahkan aksi untuk tombol "details" di sini
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF3485FF),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 8.0),
+                        ),
+                        child: Text(
+                          'Details',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
-                      Row(
-                        children: userImages.map((imageUrl) {
-                          return Container(
-                            margin: const EdgeInsets.only(left: 4.0),
-                            child: CircleAvatar(
-                              radius: 12,
-                              backgroundImage: NetworkImage(imageUrl),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    date,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontFamily: 'Inter',
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    amountOwed,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontFamily: 'Inter',
-                    ),
-                  ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 1,
-                    height: 20,
-                  ),
-                  Text(
-                    itemsPersons,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontFamily: 'Inter',
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -465,8 +486,8 @@ class _BillingPageState extends State<BillingPage> {
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: BillingPage(),
-  ));
-}
+// void main() {
+//   runApp(MaterialApp(
+//     home: BillingPage(),
+//   ));
+// }
