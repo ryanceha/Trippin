@@ -35,6 +35,21 @@ class _RecommendPageState extends State<RecommendPage> {
     super.dispose();
   }
 
+  void _nextPage() {
+    setState(() {
+      // Increment progress by a fixed step, e.g., 0.1
+      if (_pageController.page != null) {
+        progress = (_pageController.page! + 1) / 7;
+      } else {
+        progress += 0.1; // Adjust increment as needed
+      }
+      _pageController.nextPage(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +81,7 @@ class _RecommendPageState extends State<RecommendPage> {
                     ),
                   ),
                   LinearPercentIndicator(
+                    barRadius: Radius.circular(5),
                     animation: true,
                     animationDuration: 1000,
                     lineHeight: 10,
@@ -149,10 +165,7 @@ class _RecommendPageState extends State<RecommendPage> {
         Center(
           child: ElevatedButton(
             onPressed: () {
-              _pageController.nextPage(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
+              _nextPage();
             },
             child: Text("Next",
                 style: TextStyle(
@@ -283,10 +296,7 @@ class _RecommendPageState extends State<RecommendPage> {
         children: [
           GestureDetector(
             onTap: () {
-              _pageController.nextPage(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
+              _nextPage();
             },
             child: Container(
               decoration: BoxDecoration(
@@ -428,10 +438,7 @@ class _RecommendPageState extends State<RecommendPage> {
         Center(
           child: ElevatedButton(
             onPressed: () {
-              _pageController.nextPage(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
+              _nextPage();
             },
             child: Text("Next",
                 style: TextStyle(

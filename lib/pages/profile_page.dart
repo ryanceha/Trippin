@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -17,33 +16,10 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        width: 12,
-                        height: 24,
-                        child: SvgPicture.asset('lib/images/profile/whiteBack.svg'),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: 24,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
                 const SizedBox(height: 32),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center, // Center the children horizontally
+                  mainAxisAlignment: MainAxisAlignment
+                      .center, // Center the children horizontally
                   children: [
                     Image.asset(
                       'lib/images/profile/profileIcon.png',
@@ -52,7 +28,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const SizedBox(width: 16),
                     Text(
-                      'Daniel Christopher',
+                      'Aryo Binatang P.',
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 24,
@@ -68,9 +44,10 @@ class ProfilePage extends StatelessWidget {
           Flexible(
             flex: 3,
             child: Container(
-              width: double.infinity, // Makes the white container take full width
+              width:
+                  double.infinity, // Makes the white container take full width
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color(0xFFEEF5FB),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(32.0),
                   topRight: Radius.circular(32.0),
@@ -129,8 +106,9 @@ class ProfilePage extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                            backgroundColor: Colors.blue,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 12),
+                            backgroundColor: Color(0XFF3485FF),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -148,8 +126,9 @@ class ProfilePage extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                            backgroundColor: Colors.blue,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 12),
+                            backgroundColor: Color(0XFF3485FF),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -201,17 +180,18 @@ class ProfileInputField extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32.0),
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide: BorderSide(color: Color(0XFF3485FF)),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32.0),
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide: BorderSide(color: Color(0XFF3485FF)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32.0),
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide: BorderSide(color: Color(0XFF3485FF)),
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8), // Adjusted padding
+                contentPadding: EdgeInsets.symmetric(
+                    horizontal: 12, vertical: 8), // Adjusted padding
               ),
               style: TextStyle(
                 color: Colors.black,

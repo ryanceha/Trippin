@@ -3,7 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/dashboard_page.dart';
 
 class AddActivity extends StatefulWidget {
-  const AddActivity({super.key});
+  final String tripTitle;
+  final String tripImagePath;
+
+  const AddActivity(
+      {Key? key, required this.tripTitle, required this.tripImagePath});
 
   @override
   State<AddActivity> createState() => _AddActivityState();
@@ -128,8 +132,13 @@ class _AddActivityState extends State<AddActivity> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => DashboardPage()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DashboardPage(
+                        tripTitle: widget.tripTitle,
+                        tripImagePath: widget.tripImagePath,
+                      )));
         },
         // make the button round
         shape: RoundedRectangleBorder(

@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/billing_page.dart';
 import 'package:trippin/pages/expense_page.dart';
-import 'package:trippin/pages/gallery_page.dart';
+import 'package:trippin/pages/gallery_detail_page.dart';
 import 'package:trippin/pages/home_page.dart';
 import 'package:trippin/pages/itinerary_page.dart';
 import 'package:trippin/pages/packing_list_page.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  final String tripTitle;
+  final String tripImagePath;
+
+  const DashboardPage(
+      {Key? key, required this.tripTitle, required this.tripImagePath});
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -22,17 +26,21 @@ class _DashboardPageState extends State<DashboardPage> {
         children: [
           Container(
             alignment: Alignment.topCenter,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('lib/images/dashboard/dashboard-bg.png'),
+                image: AssetImage(widget.tripImagePath),
                 alignment: Alignment.topCenter,
               ),
             ),
             child: Column(
               children: [
                 const SizedBox(height: 80),
-                const Text(
-                  'Surabaya',
+                Text(
+                  widget.tripTitle == 'Bali, 2024'
+                      ? 'Bali'
+                      : widget.tripTitle == 'Surabaya, 2024'
+                          ? 'Surabaya'
+                          : 'France',
                   style: TextStyle(
                     fontSize: 40,
                     color: Colors.white,
@@ -65,20 +73,40 @@ class _DashboardPageState extends State<DashboardPage> {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: [
-                              _itineraryButton(context, 'Itinerary',
-                                  'lib/images/dashboard/list-menu/calendar.svg'),
+                              _itineraryButton(
+                                  context,
+                                  'Itinerary',
+                                  'lib/images/dashboard/list-menu/calendar.svg',
+                                  widget.tripTitle,
+                                  widget.tripImagePath),
                               const SizedBox(width: 10), // Gap between buttons
-                              _itineraryButton(context, 'Expense',
-                                  'lib/images/dashboard/list-menu/expense.svg'),
+                              _itineraryButton(
+                                  context,
+                                  'Expense',
+                                  'lib/images/dashboard/list-menu/expense.svg',
+                                  widget.tripTitle,
+                                  widget.tripImagePath),
                               const SizedBox(width: 10), // Gap between buttons
-                              _itineraryButton(context, 'Billing',
-                                  'lib/images/dashboard/list-menu/billing.svg'),
+                              _itineraryButton(
+                                  context,
+                                  'Billing',
+                                  'lib/images/dashboard/list-menu/billing.svg',
+                                  widget.tripTitle,
+                                  widget.tripImagePath),
                               const SizedBox(width: 10), // Gap between buttons
-                              _itineraryButton(context, 'Packing List',
-                                  'lib/images/dashboard/list-menu/packing-list.svg'),
+                              _itineraryButton(
+                                  context,
+                                  'Packing List',
+                                  'lib/images/dashboard/list-menu/packing-list.svg',
+                                  widget.tripTitle,
+                                  widget.tripImagePath),
                               const SizedBox(width: 10), // Gap between buttons
-                              _itineraryButton(context, 'Albums',
-                                  'lib/images/dashboard/list-menu/albums.svg'),
+                              _itineraryButton(
+                                  context,
+                                  'Albums',
+                                  'lib/images/dashboard/list-menu/albums.svg',
+                                  widget.tripTitle,
+                                  widget.tripImagePath),
                             ],
                           ),
                         ),
@@ -88,17 +116,22 @@ class _DashboardPageState extends State<DashboardPage> {
                             child: Column(
                               children: [
                                 _mainCard(
-                                    context, 'Itinerary', Color(0xFFEFB949), 2),
+                                    context,
+                                    'Itinerary',
+                                    Color(0xFFEFB949),
+                                    2,
+                                    widget.tripTitle,
+                                    widget.tripImagePath),
                                 const SizedBox(height: 20),
-                                _mainCard(
-                                    context, 'Expense', Color(0xFFE2305F), 1),
+                                _mainCard(context, 'Expense', Color(0xFFE2305F),
+                                    1, widget.tripTitle, widget.tripImagePath),
                                 const SizedBox(height: 20),
-                                _mainCard(
-                                    context, 'Billing', Color(0xFF47712D), 1),
+                                _mainCard(context, 'Billing', Color(0xFF47712D),
+                                    1, widget.tripTitle, widget.tripImagePath),
                                 const SizedBox(height: 20),
                                 _packinglistCard(context),
                                 const SizedBox(height: 20),
-                                _albumCard(),
+                                _albumCard(context, widget.tripTitle),
                               ],
                             ),
                           ),
@@ -131,7 +164,8 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 }
 
-Widget _itineraryButton(BuildContext context, String name, String imagePath) {
+Widget _itineraryButton(BuildContext context, String name, String imagePath,
+    String tripTitle, String tripImagePath) {
   return ElevatedButton(
     style: ElevatedButton.styleFrom(
       backgroundColor: const Color(0xFFEEF5FB),
@@ -144,14 +178,29 @@ Widget _itineraryButton(BuildContext context, String name, String imagePath) {
         context,
         MaterialPageRoute(
             builder: (context) => name == 'Itinerary'
-                ? ItineraryPage()
+                ? ItineraryPage(
+                    tripTitle: tripTitle,
+                    tripImagePath: tripImagePath,
+                  )
                 : name == 'Expense'
-                    ? ExpensePage()
+                    ? ExpensePage(
+                        tripTitle: tripTitle,
+                        tripImagePath: tripImagePath,
+                      )
                     : name == 'Billing'
-                        ? BillingPage()
+                        ? BillingPage(
+                            tripTitle: tripTitle,
+                            tripImagePath: tripImagePath,
+                          )
                         : name == 'Packing List'
                             ? PackingListPage()
-                            : GalleryPage()),
+                            : DetailGalleryPage(
+                                albumTitle: tripTitle == 'Bali, 2024'
+                                    ? 'Bali'
+                                    : tripTitle == 'Surabaya, 2024'
+                                        ? 'Surabaya'
+                                        : 'France',
+                              )),
       );
     },
     child: Container(
@@ -194,8 +243,8 @@ Widget _itineraryButton(BuildContext context, String name, String imagePath) {
   );
 }
 
-Widget _mainCard(
-    BuildContext context, String title, Color color, int numberOfItineraries) {
+Widget _mainCard(BuildContext context, String title, Color color,
+    int numberOfItineraries, String tripTitle, String tripImagePath) {
   return Padding(
     padding: const EdgeInsets.all(8),
     child: Container(
@@ -232,15 +281,32 @@ Widget _mainCard(
                       MaterialPageRoute(
                         builder: (context) {
                           if (title == 'Itinerary') {
-                            return ItineraryPage();
+                            return ItineraryPage(
+                              tripTitle: tripTitle,
+                              tripImagePath: tripImagePath,
+                            );
                           } else if (title == 'Expense') {
-                            return ExpensePage();
+                            return ExpensePage(
+                              tripTitle: tripTitle,
+                              tripImagePath: tripImagePath,
+                            );
                           } else if (title == 'Billing') {
-                            return BillingPage();
+                            return BillingPage(
+                              tripTitle: tripTitle,
+                              tripImagePath: tripImagePath,
+                            );
                           } else if (title == 'Packing List') {
                             return PackingListPage();
+                          } else if (title == 'Album') {
+                            return DetailGalleryPage(
+                              albumTitle: tripTitle == 'Bali, 2024'
+                                  ? 'Bali'
+                                  : tripTitle == 'Surabaya, 2024'
+                                      ? 'Surabaya'
+                                      : 'France',
+                            );
                           } else {
-                            return GalleryPage();
+                            return HomePage();
                           }
                         },
                       ),
@@ -377,7 +443,7 @@ Widget _customCheckboxListTile(String title, bool value) {
   );
 }
 
-Widget _albumCard() {
+Widget _albumCard(BuildContext context, String tripTitle) {
   // List of image path used
   List<String> imagePaths = [
     'lib/images/dashboard/album/1.jpg',
@@ -422,12 +488,19 @@ Widget _albumCard() {
                   ),
                 ),
                 GestureDetector(
-                  // onTap: () {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) => InfoPage()),
-                  //   );
-                  // },
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailGalleryPage(
+                                albumTitle: tripTitle == 'Bali, 2024'
+                                    ? 'Bali'
+                                    : tripTitle == 'Surabaya, 2024'
+                                        ? 'Surabaya'
+                                        : 'France',
+                              )),
+                    );
+                  },
                   child: Image.asset(
                     'lib/images/dashboard/info.png',
                     width: 24,
@@ -578,10 +651,4 @@ Widget _itineraryCard(Color color, String title) {
       ],
     ),
   );
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: DashboardPage(),
-  ));
 }

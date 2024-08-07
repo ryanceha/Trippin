@@ -4,7 +4,11 @@ import 'package:trippin/pages/activity_detail_page.dart';
 import 'package:trippin/pages/add_activity.dart';
 
 class ItineraryPage extends StatefulWidget {
-  const ItineraryPage({super.key});
+  final String tripTitle;
+  final String tripImagePath;
+
+  const ItineraryPage(
+      {Key? key, required this.tripTitle, required this.tripImagePath});
 
   @override
   State<ItineraryPage> createState() => _ItineraryPageState();
@@ -118,7 +122,11 @@ class _ItineraryPageState extends State<ItineraryPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddActivity()),
+                      MaterialPageRoute(
+                          builder: (context) => AddActivity(
+                                tripTitle: widget.tripTitle,
+                                tripImagePath: widget.tripImagePath,
+                              )),
                     );
                   },
                   child: Text(
@@ -244,6 +252,8 @@ class _ItineraryPageState extends State<ItineraryPage> {
           context,
           MaterialPageRoute(
             builder: (context) => ActivityDetailPage(
+              tripTitle: widget.tripTitle,
+              tripImagePath: widget.tripImagePath,
               title: title,
               location: location,
               time: time,
@@ -360,10 +370,4 @@ class _ItineraryPageState extends State<ItineraryPage> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: ItineraryPage(),
-  ));
 }
