@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class PackingListScreen extends StatelessWidget {
+class PackingListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Packing List',
-      //    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, fontFamily: 'Inter'),
-      //    ),
-      //   leading: IconButton(
-      //     icon: Icon(Icons.arrow_back),
-      //     onPressed: () {
-      //       // Handle back button action
-      //     },
-      //   ),
-      // ),
       body: PackingListBody(),
     );
   }

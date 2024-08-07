@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trippin/pages/billing_detail_page.dart';
+import 'package:trippin/pages/dashboard_page.dart';
+import 'package:trippin/pages/scan_bill_page.dart';
 
 class BillingPage extends StatefulWidget {
   @override
@@ -89,7 +92,9 @@ class _BillingPageState extends State<BillingPage> {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.pop(context);
+                // redirect to HomePage()
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DashboardPage()));
               },
               child: Container(
                 width: 12,
@@ -97,7 +102,7 @@ class _BillingPageState extends State<BillingPage> {
                 child: SvgPicture.asset('lib/images/recommend/back.svg'),
               ),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 20),
             Text(
               'Billing',
               style: TextStyle(
@@ -110,7 +115,7 @@ class _BillingPageState extends State<BillingPage> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 10.0, left: 10.0, right: 0.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -121,14 +126,17 @@ class _BillingPageState extends State<BillingPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // Add your action for adding bills here
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ScanBillPage()),
+                      );
                     },
                     child: Container(
                       width: 70,
                       height: 250,
                       decoration: BoxDecoration(
                         color: Color(0xFF3485FF),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       child: Center(
                         child: RotatedBox(
@@ -152,7 +160,7 @@ class _BillingPageState extends State<BillingPage> {
                     height: 250,
                     decoration: BoxDecoration(
                       color: Color(0xFFE93636),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -221,7 +229,7 @@ class _BillingPageState extends State<BillingPage> {
                     margin: const EdgeInsets.only(right: 10.0),
                     decoration: BoxDecoration(
                       color: Color(0xFF47712D),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -286,7 +294,7 @@ class _BillingPageState extends State<BillingPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 20), // Add some spacing before the buttons
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -306,11 +314,10 @@ class _BillingPageState extends State<BillingPage> {
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(
-                                0.5), // Warna shadow dengan opacity
-                            spreadRadius: 2, // Sebaran shadow
-                            blurRadius: 5, // Buram shadow
-                            offset: Offset(0, 3), // Posisi shadow (x, y)
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
                           ),
                         ],
                       ),
@@ -322,7 +329,7 @@ class _BillingPageState extends State<BillingPage> {
                                 ? Color(0xFF3485FF)
                                 : Colors.white,
                             fontFamily: 'Inter',
-                            fontSize: 12,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -348,11 +355,10 @@ class _BillingPageState extends State<BillingPage> {
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(
-                                0.5), // Warna shadow dengan opacity
-                            spreadRadius: 2, // Sebaran shadow
-                            blurRadius: 5, // Buram shadow
-                            offset: Offset(0, 3), // Posisi shadow (x, y)
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
                           ),
                         ],
                       ),
@@ -364,7 +370,7 @@ class _BillingPageState extends State<BillingPage> {
                                 ? Colors.white
                                 : Color(0xFF3485FF),
                             fontFamily: 'Inter',
-                            fontSize: 12,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -376,9 +382,7 @@ class _BillingPageState extends State<BillingPage> {
             ),
             const SizedBox(height: 20),
             Column(
-              children: [
-                ..._buildItineraryCards(),
-              ],
+              children: _buildItineraryCards(),
             ),
           ],
         ),
@@ -409,7 +413,7 @@ class _BillingPageState extends State<BillingPage> {
   }) {
     return GestureDetector(
       onTap: () {
-        // Handle card tap
+        // Add your action for card tap here
       },
       child: Container(
         margin: const EdgeInsets.only(top: 16.0, right: 10.0),
@@ -428,10 +432,10 @@ class _BillingPageState extends State<BillingPage> {
         child: Row(
           children: [
             Container(
-              height: 173,
-              width: 10,
+              height: 170,
+              width: 20,
               decoration: BoxDecoration(
-                color: Color(0xFF3485FF),
+                color: color,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(16),
                   bottomLeft: Radius.circular(16),
@@ -441,8 +445,8 @@ class _BillingPageState extends State<BillingPage> {
             const SizedBox(width: 10),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 15.0, left: 5.0, right: 15.0, bottom: 15.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -453,7 +457,7 @@ class _BillingPageState extends State<BillingPage> {
                           title,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Inter',
                           ),
@@ -471,7 +475,6 @@ class _BillingPageState extends State<BillingPage> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
                     Text(
                       date,
                       style: TextStyle(
@@ -480,7 +483,7 @@ class _BillingPageState extends State<BillingPage> {
                         fontFamily: 'Inter',
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 8),
                     Text(
                       amountOwed,
                       style: TextStyle(
@@ -489,10 +492,11 @@ class _BillingPageState extends State<BillingPage> {
                         fontFamily: 'Inter',
                       ),
                     ),
+                    const SizedBox(height: 24),
                     const Divider(
                       color: Colors.black,
-                      thickness: 1,
-                      height: 20,
+                      thickness: 0.5,
+                      height: 4,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -501,32 +505,32 @@ class _BillingPageState extends State<BillingPage> {
                           itemsPersons,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12,
+                            fontSize: 14,
                             fontFamily: 'Inter',
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            // Handle "See Detail" button tap
-                          },
-                          style: TextButton.styleFrom(
-                            backgroundColor: Color(
-                                0xFF3485FF), // Background color of the button
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20.0, // Adjust horizontal padding
-                                vertical: 2.0), // Adjust vertical padding
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  20.0), // Border radius for rounded corners
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => BillingDetail()));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFF3485FF),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 2.0, vertical: 0),
+                              minimumSize: Size(
+                                  80, 30), // Set minimum size for the button
                             ),
-                          ),
-                          child: Text(
-                            'See Detail',
-                            style: TextStyle(
-                              color: Colors.white, // Text color
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Inter',
+                            child: Text(
+                              'Details',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ),

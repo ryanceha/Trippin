@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trippin/pages/billing_page.dart';
 
 class BillingDetail extends StatefulWidget {
   const BillingDetail({super.key});
@@ -370,13 +371,16 @@ class _BillingDetailState extends State<BillingDetail>
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => BillingPage()));
+        },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          // primary: Color(0xFF3485FF),
+          backgroundColor: Color(0xFF3485FF),
         ),
         child: Center(
           child: Text(
