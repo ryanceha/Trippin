@@ -27,6 +27,7 @@ class _BillingPageState extends State<BillingPage> {
         'lib/images/split_billing/grace.png',
         'lib/images/split_billing/ryan.png',
       ],
+      "status": "active",
     },
     {
       "title": "Makan Malam",
@@ -40,6 +41,7 @@ class _BillingPageState extends State<BillingPage> {
         'lib/images/split_billing/sarah.png',
         'lib/images/split_billing/ryan.png',
       ],
+      "status": "done",
     },
     {
       "title": "Hotel Menginap",
@@ -52,6 +54,7 @@ class _BillingPageState extends State<BillingPage> {
       "userImages": [
         'lib/images/split_billing/michael.png',
       ],
+      "status": "active",
     },
     {
       "title": "Transportasi",
@@ -65,6 +68,7 @@ class _BillingPageState extends State<BillingPage> {
         'lib/images/split_billing/anna.png',
         'lib/images/split_billing/john.png',
       ],
+      "status": "done",
     },
     {
       "title": "Souvenir",
@@ -78,6 +82,7 @@ class _BillingPageState extends State<BillingPage> {
         'lib/images/split_billing/jessica.png',
         'lib/images/split_billing/leo.png',
       ],
+      "status": "active",
     },
   ];
 
@@ -391,7 +396,17 @@ class _BillingPageState extends State<BillingPage> {
   }
 
   List<Widget> _buildItineraryCards() {
-    return itineraries.map((itinerary) {
+    List<Map<String, dynamic>> filteredItineraries =
+        itineraries.where((itinerary) {
+      return isDoneSelected
+          ? itinerary['status'] == 'done'
+          : itinerary['status'] == 'active';
+    }).toList();
+
+    print(
+        'Filtered Itineraries: ${filteredItineraries.length}'); // Debugging statement
+
+    return filteredItineraries.map((itinerary) {
       return _buildItineraryCard(
         title: itinerary['title'],
         date: itinerary['date'],
