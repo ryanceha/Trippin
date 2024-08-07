@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/billing_page.dart';
 import 'package:trippin/pages/expense_page.dart';
+import 'package:trippin/pages/gallery_page.dart';
 import 'package:trippin/pages/home_page.dart';
 import 'package:trippin/pages/itinerary_page.dart';
-import 'package:trippin/pages/packing_list.dart';
+import 'package:trippin/pages/packing_list_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -114,7 +115,8 @@ class _DashboardPageState extends State<DashboardPage> {
             left: 30,
             child: GestureDetector(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
               },
               child: Container(
                 width: 15,
@@ -139,15 +141,17 @@ Widget _itineraryButton(BuildContext context, String name, String imagePath) {
     ),
     onPressed: () {
       Navigator.push(
-          context,
-          MaterialPageRoute(
+        context,
+        MaterialPageRoute(
             builder: (context) => name == 'Itinerary'
                 ? ItineraryPage()
                 : name == 'Expense'
                     ? ExpensePage()
-                    : name == 'Packing List'
-                        ? PackingListScreen()
-                        : HomePage()),
+                    : name == 'Billing'
+                        ? BillingPage()
+                        : name == 'Packing List'
+                            ? PackingListPage()
+                            : GalleryPage()),
       );
     },
     child: Container(
@@ -226,13 +230,17 @@ Widget _mainCard(
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) {
+                        builder: (context) {
                           if (title == 'Itinerary') {
                             return ItineraryPage();
+                          } else if (title == 'Expense') {
+                            return ExpensePage();
                           } else if (title == 'Billing') {
                             return BillingPage();
+                          } else if (title == 'Packing List') {
+                            return PackingListPage();
                           } else {
-                            return HomePage();
+                            return GalleryPage();
                           }
                         },
                       ),
@@ -302,7 +310,7 @@ Widget _packinglistCard(BuildContext context) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PackingListScreen()),
+                          builder: (context) => PackingListPage()),
                     );
                   },
                   child: Image.asset(

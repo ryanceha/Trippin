@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trippin/pages/billing_page.dart';
 
 class SplitBilling extends StatefulWidget {
   const SplitBilling({super.key});
@@ -415,7 +416,10 @@ class _SplitBillingState extends State<SplitBilling> {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => BillingPage()));
+        },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
           shape: RoundedRectangleBorder(

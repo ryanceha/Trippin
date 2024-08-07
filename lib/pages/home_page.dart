@@ -203,6 +203,7 @@ class _HomePageState extends State<HomePage>
                 }).toList(),
               ),
             ),
+            
             // Curved Navigation Bar
             Positioned(
               bottom: 0,

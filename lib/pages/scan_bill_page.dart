@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trippin/pages/edit_bill_page.dart';
+import 'package:trippin/pages/home_page.dart';
 import 'package:video_player/video_player.dart';
-import 'dart:async';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ScanBillPage extends StatefulWidget {
@@ -13,30 +13,38 @@ class ScanBillPage extends StatefulWidget {
 
 class _ScanBillPageState extends State<ScanBillPage> {
   late VideoPlayerController _controller;
+  bool _videoEnded = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset('lib/images/scan_bill/scanbill.mp4')
-      ..initialize().then((_) {
-        setState(() {});
-      })
-      ..setLooping(true)
-      ..play();
+    _initializeVideo();
+  }
 
-    // Start a timer to redirect after 5 seconds
-    Timer(Duration(seconds: 5), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => EditBill()),
-      );
-    });
+  void _initializeVideo() {
+    _controller =
+        VideoPlayerController.asset('lib/images/scan_bill/scanbill.mp4')
+          ..initialize().then((_) {
+            setState(() {});
+            _controller.play();
+            _controller.addListener(() {
+              if (_controller.value.position == _controller.value.duration) {
+                setState(() {
+                  // print 'video sudah selesai'
+                  print("Video Done");
+                  _videoEnded = true;
+                });
+              }
+            });
+          }).catchError((error) {
+            print('Error initializing video: $error');
+          });
   }
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -79,7 +87,7 @@ class _ScanBillPageState extends State<ScanBillPage> {
                   ? Container(
                       width: 300,
                       height: 400,
-                      padding: EdgeInsets.all(8), // Added padding
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.blue, width: 2),
                         borderRadius: BorderRadius.circular(16),
@@ -88,21 +96,14 @@ class _ScanBillPageState extends State<ScanBillPage> {
                         borderRadius: BorderRadius.circular(12),
                         child: AspectRatio(
                           aspectRatio: _controller.value.aspectRatio,
-                          child: FittedBox(
-                            fit: BoxFit.cover,
-                            child: SizedBox(
-                              width: _controller.value.size.width,
-                              height: _controller.value.size.height,
-                              child: VideoPlayer(_controller),
-                            ),
-                          ),
+                          child: VideoPlayer(_controller),
                         ),
                       ),
                     )
                   : Container(
                       width: 300,
                       height: 400,
-                      padding: EdgeInsets.all(8), // Added padding
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.blue, width: 2),
                         borderRadius: BorderRadius.circular(16),
@@ -122,7 +123,8 @@ class _ScanBillPageState extends State<ScanBillPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 30, left: 20, right: 20, top: 20),
+            padding:
+                const EdgeInsets.only(bottom: 30, left: 20, right: 20, top: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -132,9 +134,7 @@ class _ScanBillPageState extends State<ScanBillPage> {
                     width: 40,
                     height: 40,
                   ),
-                  onPressed: () {
-                    // action for image picker
-                  },
+                  onPressed: () {},
                 ),
                 IconButton(
                   icon: SvgPicture.asset(
@@ -143,7 +143,10 @@ class _ScanBillPageState extends State<ScanBillPage> {
                     height: 60,
                   ),
                   onPressed: () {
-                    // action for camera capture
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EditBill()),
+                    );
                   },
                 ),
                 IconButton(
@@ -153,7 +156,7 @@ class _ScanBillPageState extends State<ScanBillPage> {
                     height: 40,
                   ),
                   onPressed: () {
-                    // action for flash
+                    // Action for flash
                   },
                 ),
               ],

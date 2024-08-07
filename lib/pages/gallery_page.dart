@@ -18,6 +18,8 @@ class GalleryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // set the back button to false
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             GestureDetector(

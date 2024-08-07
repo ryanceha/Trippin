@@ -269,13 +269,13 @@ class _AddActivityState extends State<AddActivity> {
 
   Widget _colorPicker() {
     List<Color> colors = [
-      Colors.amber,
-      Colors.pink,
-      Colors.green,
-      Colors.blue,
-      Colors.purple,
-      Colors.cyan,
-      Colors.red
+      Color(0xFFEFB949),
+      Color(0xFFE2305F),
+      Color(0xFF47712D),
+      Color(0xFF0037F8),
+      Color(0xFF9747FF),
+      Color(0xFF00FFF0),
+      Color(0xFFFF0000)
     ];
     return Wrap(
       spacing: 10,
