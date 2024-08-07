@@ -8,15 +8,19 @@ class ActivityDetailPage extends StatefulWidget {
   final String time;
   final IconData icon;
   final Color color;
+  final String tripTitle;
+  final String tripImagePath;
 
-  const ActivityDetailPage({
-    Key? key,
-    required this.title,
-    required this.location,
-    required this.time,
-    required this.icon,
-    required this.color,
-  }) : super(key: key);
+  const ActivityDetailPage(
+      {Key? key,
+      required this.title,
+      required this.location,
+      required this.time,
+      required this.icon,
+      required this.color,
+      required this.tripTitle,
+      required this.tripImagePath})
+      : super(key: key);
 
   @override
   State<ActivityDetailPage> createState() => _ActivityDetailPageState();
@@ -80,7 +84,10 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AddActivity()),
+                                builder: (context) => AddActivity(
+                                      tripTitle: widget.tripTitle,
+                                      tripImagePath: widget.tripImagePath,
+                                    )),
                           );
                         },
                         child: Text(
@@ -116,7 +123,10 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AddActivity()),
+                                builder: (context) => AddActivity(
+                                      tripTitle: widget.tripTitle,
+                                      tripImagePath: widget.tripImagePath,
+                                    )),
                           );
                         },
                       ),
@@ -266,16 +276,4 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: ActivityDetailPage(
-      title: "Makan Siang",
-      location: "Claypot Popo",
-      time: "12:00 - 13:00",
-      icon: Icons.restaurant,
-      color: Color(0xFF47712D),
-    ),
-  ));
 }

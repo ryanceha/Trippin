@@ -5,6 +5,12 @@ import 'package:trippin/pages/dashboard_page.dart';
 import 'package:trippin/pages/scan_bill_page.dart';
 
 class BillingPage extends StatefulWidget {
+  final String tripTitle;
+  final String tripImagePath;
+
+  const BillingPage(
+      {Key? key, required this.tripTitle, required this.tripImagePath});
+
   @override
   _BillingPageState createState() => _BillingPageState();
 }
@@ -98,8 +104,13 @@ class _BillingPageState extends State<BillingPage> {
             GestureDetector(
               onTap: () {
                 // redirect to HomePage()
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DashboardPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DashboardPage(
+                              tripTitle: widget.tripTitle,
+                              tripImagePath: widget.tripImagePath,
+                            )));
               },
               child: Container(
                 width: 12,
@@ -120,7 +131,7 @@ class _BillingPageState extends State<BillingPage> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -133,7 +144,11 @@ class _BillingPageState extends State<BillingPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ScanBillPage()),
+                        MaterialPageRoute(
+                            builder: (context) => ScanBillPage(
+                                  tripTitle: widget.tripTitle,
+                                  tripImagePath: widget.tripImagePath,
+                                )),
                       );
                     },
                     child: Container(
@@ -389,6 +404,7 @@ class _BillingPageState extends State<BillingPage> {
             Column(
               children: _buildItineraryCards(),
             ),
+            const SizedBox(height: 32),
           ],
         ),
       ),
@@ -531,7 +547,10 @@ class _BillingPageState extends State<BillingPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => BillingDetail()));
+                                      builder: (context) => BillingDetail(
+                                            tripTitle: widget.tripTitle,
+                                            tripImagePath: widget.tripImagePath,
+                                          )));
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xFF3485FF),

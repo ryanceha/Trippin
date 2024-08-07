@@ -3,7 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/split_billing_page.dart';
 
 class EditBill extends StatefulWidget {
-  const EditBill({super.key});
+  final String tripTitle;
+  final String tripImagePath;
+
+  const EditBill(
+      {Key? key, required this.tripTitle, required this.tripImagePath});
 
   @override
   State<EditBill> createState() => _EditBillState();
@@ -133,7 +137,7 @@ class _EditBillState extends State<EditBill> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SplitBilling()));
+                              builder: (context) => SplitBilling(tripTitle: widget.tripTitle, tripImagePath: widget.tripImagePath,)));
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(

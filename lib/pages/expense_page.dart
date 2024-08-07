@@ -3,7 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/add_activity.dart';
 
 class ExpensePage extends StatefulWidget {
-  const ExpensePage({super.key});
+  final String tripTitle;
+  final String tripImagePath;
+
+  const ExpensePage(
+      {Key? key, required this.tripTitle, required this.tripImagePath});
 
   @override
   State<ExpensePage> createState() => _ExpensePageState();
@@ -311,7 +315,12 @@ class _ExpensePageState extends State<ExpensePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddActivity()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AddActivity(
+                        tripTitle: widget.tripTitle,
+                        tripImagePath: widget.tripImagePath,
+                      )));
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),

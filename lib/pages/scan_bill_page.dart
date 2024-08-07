@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:trippin/pages/edit_bill_page.dart';
-import 'package:trippin/pages/home_page.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ScanBillPage extends StatefulWidget {
-  const ScanBillPage({Key? key}) : super(key: key);
+  final String tripTitle;
+  final String tripImagePath;
+
+  const ScanBillPage(
+      {Key? key, required this.tripTitle, required this.tripImagePath});
 
   @override
   _ScanBillPageState createState() => _ScanBillPageState();
@@ -13,7 +16,6 @@ class ScanBillPage extends StatefulWidget {
 
 class _ScanBillPageState extends State<ScanBillPage> {
   late VideoPlayerController _controller;
-  bool _videoEnded = false;
 
   @override
   void initState() {
@@ -32,7 +34,6 @@ class _ScanBillPageState extends State<ScanBillPage> {
                 setState(() {
                   // print 'video sudah selesai'
                   print("Video Done");
-                  _videoEnded = true;
                 });
               }
             });
@@ -145,7 +146,11 @@ class _ScanBillPageState extends State<ScanBillPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => EditBill()),
+                      MaterialPageRoute(
+                          builder: (context) => EditBill(
+                                tripTitle: widget.tripTitle,
+                                tripImagePath: widget.tripImagePath,
+                              )),
                     );
                   },
                 ),

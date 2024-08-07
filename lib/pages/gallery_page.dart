@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/gallery_detail_page.dart';
 
 class GalleryPage extends StatelessWidget {
@@ -17,42 +16,17 @@ class GalleryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // set the back button to false
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                width: 24,
-                height: 24,
-                child: SvgPicture.asset('lib/images/recommend/back.svg'),
-              ),
-            ),
-            const SizedBox(width: 20),
-            Text(
-              'Albums',
-              style: TextStyle(
-                fontFamily: 'Inter',
-                fontSize: 24,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-          ],
-        ),
-      ),
+      backgroundColor: Color(0xFFEEF5FB),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const SizedBox(height: 8),
+              const SizedBox(height: 32),
               albumSection(context, 'Recently', recentlyAlbums),
               albumSection(context, 'Other Albums', otherAlbums),
+              const SizedBox(height: 64),
             ],
           ),
         ),

@@ -71,9 +71,22 @@ class DetailGalleryPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
+        onPressed: () {
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => AddActivity()));
+        },
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
+        backgroundColor: Color(0xFF3485FF),
+        child: SvgPicture.asset(
+          'lib/images/expense/add.svg',
+          color: Colors.white,
+          width: 20,
+          height: 20,
+        ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

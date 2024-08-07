@@ -3,7 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trippin/pages/billing_page.dart';
 
 class BillingDetail extends StatefulWidget {
-  const BillingDetail({super.key});
+  final String tripTitle;
+  final String tripImagePath;
+
+  const BillingDetail(
+      {Key? key, required this.tripTitle, required this.tripImagePath});
 
   @override
   State<BillingDetail> createState() => _BillingDetailState();
@@ -373,7 +377,12 @@ class _BillingDetailState extends State<BillingDetail>
       child: ElevatedButton(
         onPressed: () {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => BillingPage()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BillingPage(
+                        tripTitle: widget.tripTitle,
+                        tripImagePath: widget.tripImagePath,
+                      )));
         },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
