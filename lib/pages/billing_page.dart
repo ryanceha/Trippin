@@ -22,9 +22,60 @@ class _BillingPageState extends State<BillingPage> {
         'lib/images/split_billing/aryo.png',
         'lib/images/split_billing/ruth.png',
         'lib/images/split_billing/grace.png',
+        'lib/images/split_billing/ryan.png',
       ],
     },
-    // Add other itineraries here...
+    {
+      "title": "Makan Malam",
+      "location": "Restoran ABC",
+      "date": "28/05/2024 19:30",
+      "amountOwed": "You owe Sarah IDR 200,000",
+      "itemsPersons": "8 items · 4 persons",
+      "icon": Icons.restaurant,
+      "color": Color(0xFF76C7C0),
+      "userImages": [
+        'lib/images/split_billing/sarah.png',
+        'lib/images/split_billing/ryan.png',
+      ],
+    },
+    {
+      "title": "Hotel Menginap",
+      "location": "Hotel XYZ",
+      "date": "29/05/2024 15:00",
+      "amountOwed": "You owe Michael IDR 500,000",
+      "itemsPersons": "1 item · 2 persons",
+      "icon": Icons.hotel,
+      "color": Color(0xFF6D28D9),
+      "userImages": [
+        'lib/images/split_billing/michael.png',
+      ],
+    },
+    {
+      "title": "Transportasi",
+      "location": "Taksi",
+      "date": "30/05/2024 09:00",
+      "amountOwed": "You owe Anna IDR 75,000",
+      "itemsPersons": "2 items · 2 persons",
+      "icon": Icons.directions_car,
+      "color": Color(0xFFFF6F61),
+      "userImages": [
+        'lib/images/split_billing/anna.png',
+        'lib/images/split_billing/john.png',
+      ],
+    },
+    {
+      "title": "Souvenir",
+      "location": "Toko Oleh-Oleh",
+      "date": "31/05/2024 10:00",
+      "amountOwed": "You owe Jessica IDR 120,000",
+      "itemsPersons": "5 items · 3 persons",
+      "icon": Icons.shopping_bag,
+      "color": Color(0xFFFFB300),
+      "userImages": [
+        'lib/images/split_billing/jessica.png',
+        'lib/images/split_billing/leo.png',
+      ],
+    },
   ];
 
   @override
@@ -354,17 +405,14 @@ class _BillingPageState extends State<BillingPage> {
     required String amountOwed,
     required String itemsPersons,
     required Color color,
-    required List<String> userImages, // List of user image URLs
+    required List<String> userImages,
   }) {
     return GestureDetector(
       onTap: () {
-        // You may need to pass the context here
-        // to use Navigator.push inside a StatelessWidget
+        // Handle card tap
       },
       child: Container(
         margin: const EdgeInsets.only(top: 16.0, right: 10.0),
-        // padding: const EdgeInsets.only(
-        //     top: 15.0, left: 15.0, right: 15.0, bottom: 15.0),
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -380,7 +428,7 @@ class _BillingPageState extends State<BillingPage> {
         child: Row(
           children: [
             Container(
-              height: 150,
+              height: 173,
               width: 10,
               decoration: BoxDecoration(
                 color: Color(0xFF3485FF),
@@ -405,7 +453,7 @@ class _BillingPageState extends State<BillingPage> {
                           title,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Inter',
                           ),
@@ -428,7 +476,7 @@ class _BillingPageState extends State<BillingPage> {
                       date,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 14,
+                        fontSize: 12,
                         fontFamily: 'Inter',
                       ),
                     ),
@@ -437,7 +485,7 @@ class _BillingPageState extends State<BillingPage> {
                       amountOwed,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 14,
+                        fontSize: 12,
                         fontFamily: 'Inter',
                       ),
                     ),
@@ -446,35 +494,44 @@ class _BillingPageState extends State<BillingPage> {
                       thickness: 1,
                       height: 20,
                     ),
-                    Text(
-                      itemsPersons,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontFamily: 'Inter',
-                      ),
-                    ),
-                    Spacer(),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Tambahkan aksi untuk tombol "details" di sini
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF3485FF),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 8.0),
-                        ),
-                        child: Text(
-                          'Details',
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          itemsPersons,
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontFamily: 'Inter',
                           ),
                         ),
-                      ),
-                    ),
+                        TextButton(
+                          onPressed: () {
+                            // Handle "See Detail" button tap
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: Color(
+                                0xFF3485FF), // Background color of the button
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20.0, // Adjust horizontal padding
+                                vertical: 2.0), // Adjust vertical padding
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  20.0), // Border radius for rounded corners
+                            ),
+                          ),
+                          child: Text(
+                            'See Detail',
+                            style: TextStyle(
+                              color: Colors.white, // Text color
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Inter',
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -485,9 +542,3 @@ class _BillingPageState extends State<BillingPage> {
     );
   }
 }
-
-// void main() {
-//   runApp(MaterialApp(
-//     home: BillingPage(),
-//   ));
-// }
