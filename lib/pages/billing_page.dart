@@ -58,7 +58,7 @@ class _BillingPageState extends State<BillingPage> {
       "icon": Icons.hotel,
       "color": Color(0xFF6D28D9),
       "userImages": [
-        'lib/images/split_billing/michael.png',
+        'lib/images/split_billing/michael.jpeg',
       ],
       "status": "active",
     },
@@ -71,8 +71,8 @@ class _BillingPageState extends State<BillingPage> {
       "icon": Icons.directions_car,
       "color": Color(0xFFFF6F61),
       "userImages": [
-        'lib/images/split_billing/anna.png',
-        'lib/images/split_billing/john.png',
+        'lib/images/split_billing/michael.jpeg',
+        'lib/images/split_billing/aryo.png',
       ],
       "status": "done",
     },
@@ -85,8 +85,8 @@ class _BillingPageState extends State<BillingPage> {
       "icon": Icons.shopping_bag,
       "color": Color(0xFFFFB300),
       "userImages": [
-        'lib/images/split_billing/jessica.png',
-        'lib/images/split_billing/leo.png',
+        'lib/images/split_billing/aryo.png',
+        'lib/images/split_billing/grace.png',
       ],
       "status": "active",
     },
