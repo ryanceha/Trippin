@@ -30,6 +30,35 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                // redirect to HomePage()
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset('lib/images/recommend/back.svg'),
+              ),
+            ),
+            const SizedBox(width: 20),
+            Text(
+              'Activity Detail',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+      ),
       body: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -38,30 +67,6 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32.0),
           child: Column(
             children: [
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      width: 12,
-                      height: 24,
-                      child: SvgPicture.asset('lib/images/recommend/back.svg'),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Text(
-                    'Activity Detail',
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
               _detailCard(
                   widget.color, widget.title, widget.location, widget.time),
               const Spacer(),

@@ -90,7 +90,7 @@ class _ScanBillPageState extends State<ScanBillPage> {
                       height: 400,
                       padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue, width: 2),
+                        border: Border.all(color: Color(0XFF3485FF), width: 2),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: ClipRRect(
@@ -106,7 +106,7 @@ class _ScanBillPageState extends State<ScanBillPage> {
                       height: 400,
                       padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue, width: 2),
+                        border: Border.all(color: Color(0XFF3485FF), width: 2),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: ClipRRect(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:trippin/pages/dashboard_page.dart';
 import 'package:trippin/pages/home_page.dart';
 
 class AddTripPage extends StatefulWidget {
@@ -19,36 +18,40 @@ class _AddTripPageState extends State<AddTripPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset('lib/images/recommend/back.svg'),
+              ),
+            ),
+            const SizedBox(width: 20),
+            Text(
+              'Add Trip',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      width: 24,
-                      height: 24,
-                      child: SvgPicture.asset('lib/images/recommend/back.svg'),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Text(
-                    'Add Trip',
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
               _inputLabel("Title"),
               const SizedBox(height: 5),
               _inputField('Your trip title', _titleController),

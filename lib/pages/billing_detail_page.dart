@@ -21,36 +21,41 @@ class _BillingDetailState extends State<BillingDetail>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                // redirect to HomePage()
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset('lib/images/recommend/back.svg'),
+              ),
+            ),
+            const SizedBox(width: 20),
+            Text(
+              'Bill Details',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      width: 12,
-                      height: 24,
-                      child: SvgPicture.asset('lib/images/recommend/back.svg'),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Text(
-                    'Bill Details',
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
               Text(
                 "Sendok Bebek",
                 style: TextStyle(

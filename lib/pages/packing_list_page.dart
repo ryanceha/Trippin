@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PackingListPage extends StatelessWidget {
+  final String tripTitle;
+  const PackingListPage({Key? key, required this.tripTitle}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PackingListBody(),
+      body: PackingListBody(
+        tripTitle: tripTitle,
+      ),
     );
   }
 }
 
 class PackingListBody extends StatefulWidget {
+  final String tripTitle;
+  const PackingListBody({Key? key, required this.tripTitle}) : super(key: key);
+
   @override
   _PackingListBodyState createState() => _PackingListBodyState();
 }
@@ -69,89 +77,101 @@ class _PackingListBodyState extends State<PackingListBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 32),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  width: 12,
-                  height: 24,
-                  child: SvgPicture.asset('lib/images/recommend/back.svg'),
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                // redirect to HomePage()
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset('lib/images/recommend/back.svg'),
               ),
-              const SizedBox(width: 20),
+            ),
+            const SizedBox(width: 20),
+            Text(
+              'Packing List',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                'Packing List',
+                widget.tripTitle,
                 style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 24,
-                  fontWeight: FontWeight.w800,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Inter'),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(), // Disable scrolling
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: [
+                      Checkbox(
+                        value: items[index]['checked'],
+                        onChanged: (bool? value) {
+                          setState(() {
+                            items[index]['checked'] = value!;
+                          });
+                        },
+                      ),
+                      Expanded(
+                        child: Text(
+                          items[index]['name'],
+                          style: TextStyle(
+                            fontSize: 18,
+                            decoration: items[index]['checked']
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          setState(() {
+                            items.removeAt(index);
+                          });
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: _showAddItemDialog,
+                child: Text(
+                  '+ Add List Item',
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0XFF3485FF),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 16),
-          Text(
-            'Surabaya',
-            style: TextStyle(
-                fontSize: 28, fontWeight: FontWeight.bold, fontFamily: 'Inter'),
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  Checkbox(
-                    value: items[index]['checked'],
-                    onChanged: (bool? value) {
-                      setState(() {
-                        items[index]['checked'] = value!;
-                      });
-                    },
-                  ),
-                  Expanded(
-                    child: Text(
-                      items[index]['name'],
-                      style: TextStyle(
-                        fontSize: 18,
-                        decoration: items[index]['checked']
-                            ? TextDecoration.lineThrough
-                            : TextDecoration.none,
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () {
-                      setState(() {
-                        items.removeAt(index);
-                      });
-                    },
-                  ),
-                ],
-              );
-            },
-          ),
-          SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: _showAddItemDialog,
-            child: Text(
-              '+ Add List Item',
-              style: TextStyle(color: Colors.white), // Warna teks putih
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue, // Warna biru untuk tombol
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -143,40 +143,64 @@ class _HomePageState extends State<HomePage>
             bottom: 0,
             left: 0,
             right: 0,
-            child: CurvedNavigationBar(
-              backgroundColor: Colors.transparent,
-              index: _currentIndex,
-              height: 50,
-              items: [
-                Icon(Icons.photo_outlined,
-                    color: _currentIndex == 0 ? Colors.white : Colors.black),
-                Icon(Icons.add_rounded,
-                    color: _currentIndex == 1 ? Colors.white : Colors.black),
-                Icon(Icons.account_circle,
-                    color: _currentIndex == 2 ? Colors.white : Colors.black),
+            child: Column(
+              children: [
+                AnimatedOpacity(
+                  opacity: _isAddButtonSelected ? 1.0 : 0.0,
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeIn,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Text(
+                      'Add New Trip',
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF3485FF),
+                      ),
+                    ),
+                  ),
+                ),
+                CurvedNavigationBar(
+                  backgroundColor: Colors.transparent,
+                  index: _currentIndex,
+                  height: 50,
+                  items: [
+                    Icon(Icons.photo_outlined,
+                        color:
+                            _currentIndex == 0 ? Colors.white : Colors.black),
+                    Icon(Icons.add_rounded,
+                        color:
+                            _currentIndex == 1 ? Colors.white : Colors.black),
+                    Icon(Icons.account_circle,
+                        color:
+                            _currentIndex == 2 ? Colors.white : Colors.black),
+                  ],
+                  onTap: (index) {
+                    if (index == 1) {
+                      if (_isAddButtonSelected) {
+                        _toggleDrawer();
+                      }
+                      setState(() {
+                        _isAddButtonSelected = true;
+                      });
+                      _currentIndex = index;
+                    } else {
+                      setState(() {
+                        _currentIndex = index;
+                        _isAddButtonSelected = false;
+                      });
+                      if (_showBottomDrawer) {
+                        _toggleDrawer();
+                      }
+                    }
+                  },
+                  animationDuration: Duration(milliseconds: 200),
+                  color: Colors.white,
+                  buttonBackgroundColor: Color(0xFF3485FF),
+                ),
               ],
-              onTap: (index) {
-                if (index == 1) {
-                  if (_isAddButtonSelected) {
-                    _toggleDrawer();
-                  }
-                  setState(() {
-                    _isAddButtonSelected = true;
-                  });
-                  _currentIndex = index;
-                } else {
-                  setState(() {
-                    _currentIndex = index;
-                    _isAddButtonSelected = false;
-                  });
-                  if (_showBottomDrawer) {
-                    _toggleDrawer();
-                  }
-                }
-              },
-              animationDuration: Duration(milliseconds: 200),
-              color: Colors.white,
-              buttonBackgroundColor: Color(0xFF3485FF),
             ),
           ),
         ],

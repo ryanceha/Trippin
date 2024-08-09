@@ -129,7 +129,9 @@ class _DashboardPageState extends State<DashboardPage> {
                                 _mainCard(context, 'Billing', Color(0xFF47712D),
                                     1, widget.tripTitle, widget.tripImagePath),
                                 const SizedBox(height: 20),
-                                _packinglistCard(context),
+                                PackingListCard(
+                                  tripTitle: widget.tripTitle,
+                                ),
                                 const SizedBox(height: 20),
                                 _albumCard(context, widget.tripTitle),
                               ],
@@ -193,7 +195,9 @@ Widget _itineraryButton(BuildContext context, String name, String imagePath,
                             tripImagePath: tripImagePath,
                           )
                         : name == 'Packing List'
-                            ? PackingListPage()
+                            ? PackingListPage(
+                                tripTitle: tripTitle,
+                              )
                             : DetailGalleryPage(
                                 albumTitle: tripTitle == 'Bali, 2024'
                                     ? 'Bali'
@@ -216,7 +220,7 @@ Widget _itineraryButton(BuildContext context, String name, String imagePath,
             width: 30,
             height: 30,
             decoration: const BoxDecoration(
-              color: Colors.blue,
+              color: Color(0XFF3485FF),
               shape: BoxShape.circle,
             ),
             child: Center(
@@ -234,7 +238,7 @@ Widget _itineraryButton(BuildContext context, String name, String imagePath,
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: Colors.blue,
+              color: Color(0XFF3485FF),
             ),
           ),
         ],
@@ -296,7 +300,9 @@ Widget _mainCard(BuildContext context, String title, Color color,
                               tripImagePath: tripImagePath,
                             );
                           } else if (title == 'Packing List') {
-                            return PackingListPage();
+                            return PackingListPage(
+                              tripTitle: tripTitle,
+                            );
                           } else if (title == 'Album') {
                             return DetailGalleryPage(
                               albumTitle: tripTitle == 'Bali, 2024'
@@ -341,106 +347,128 @@ Widget _mainCard(BuildContext context, String title, Color color,
   );
 }
 
-Widget _packinglistCard(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.all(8),
-    child: Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            spreadRadius: 5,
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Packing list',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PackingListPage()),
-                    );
-                  },
-                  child: Image.asset(
-                    'lib/images/dashboard/info.png',
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
-              ],
+class PackingListCard extends StatefulWidget {
+  final String tripTitle;
+
+  PackingListCard({required this.tripTitle});
+
+  @override
+  _PackingListCardState createState() => _PackingListCardState();
+}
+
+class _PackingListCardState extends State<PackingListCard> {
+  // Sample packing list with initial checked states
+  final Map<String, bool> _packingList = {
+    'Passport': true,
+    'Tickets': true,
+    'Sunglasses': false,
+    'Clothes': false,
+    'Toiletries': false,
+    'Camera': false,
+    'Charger': false,
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              spreadRadius: 5,
             ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 0, right: 16, left: 16, bottom: 8),
-            child: Container(
-              height: 200, // Set a fixed height for the container
-              child: Column(
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        _customCheckboxListTile('Passport', true),
-                        _customCheckboxListTile('Tickets', true),
-                        _customCheckboxListTile('Sunglasses', false),
-                        _customCheckboxListTile('Clothes', false),
-                        _customCheckboxListTile('Toiletries', false),
-                        _customCheckboxListTile('Camera', false),
-                        _customCheckboxListTile('Charger', false),
-                      ],
+                  Text(
+                    'Packing list',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PackingListPage(
+                            tripTitle: widget.tripTitle,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      'lib/images/dashboard/info.png',
+                      width: 24,
+                      height: 24,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 0, right: 16, left: 16, bottom: 8),
+              child: Container(
+                height: 200, // Set a fixed height for the container
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        children: _packingList.keys.map((String key) {
+                          return _customCheckboxListTile(
+                              key, _packingList[key]!);
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-Widget _customCheckboxListTile(String title, bool value) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(
-        vertical: 0), // Adjust the vertical padding as needed
-    child: ListTile(
-      contentPadding: EdgeInsets.symmetric(
-          horizontal: 0), // Adjust the horizontal padding as needed
-      leading: Checkbox(
-        value: value,
-        onChanged: (bool? newValue) {
-          // Handle change
-        },
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
+  Widget _customCheckboxListTile(String title, bool value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 0),
+      child: ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 0),
+        leading: Checkbox(
+          value: value,
+          onChanged: (bool? newValue) {
+            setState(() {
+              _packingList[title] = newValue!;
+            });
+          },
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
             fontSize: 16,
             fontFamily: 'Inter',
-            color: Colors.black), // Adjust the font size as needed
+            color: Colors.black,
+          ),
+        ),
+        dense: true, // This reduces the height of the ListTile
       ),
-      dense: true, // This reduces the height of the ListTile
-    ),
-  );
+    );
+  }
 }
 
 Widget _albumCard(BuildContext context, String tripTitle) {
@@ -527,13 +555,30 @@ Widget _albumCard(BuildContext context, String tripTitle) {
               ),
               itemCount: imagePaths.length, // Use the length of the image list
               itemBuilder: (context, index) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      image: AssetImage(imagePaths[index]),
-                      fit: BoxFit.cover,
+                return GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        content: ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                              16), // Set the border radius here
+                          child: Image.asset(
+                            imagePaths[index],
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(
+                        image: AssetImage(imagePaths[index]),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 );
