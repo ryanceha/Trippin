@@ -6,9 +6,23 @@ class DetailGalleryPage extends StatelessWidget {
 
   DetailGalleryPage({required this.albumTitle});
 
-  final List<String> images =
-      List.generate(15, (index) => 'lib/images/details_images/yoga.png');
-
+  final List<String> images = [
+    'lib/images/details_images/1.jpg',
+    'lib/images/details_images/2.jpg',
+    'lib/images/details_images/3.jpg',
+    'lib/images/details_images/4.jpg',
+    'lib/images/details_images/5.jpg',
+    'lib/images/details_images/6.jpg',
+    'lib/images/details_images/7.jpg',
+    'lib/images/details_images/8.jpg',
+    'lib/images/details_images/9.jpg',
+    'lib/images/details_images/10.jpg',
+    'lib/images/details_images/11.jpeg',
+    'lib/images/details_images/12.jpeg',
+    'lib/images/details_images/13.jpeg',
+    'lib/images/details_images/14.jpeg',
+    'lib/images/details_images/15.jpeg',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

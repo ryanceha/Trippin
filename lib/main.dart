@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:trippin/pages/galery.dart';
 import 'package:trippin/pages/splash_page.dart';
 
 void main() {
@@ -20,3 +21,4 @@ class MainApp extends StatelessWidget {
     );
   }
 }
+ 
