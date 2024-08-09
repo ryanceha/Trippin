@@ -113,7 +113,7 @@ class _BillingPageState extends State<BillingPage> {
                             )));
               },
               child: Container(
-                width: 12,
+                width: 24,
                 height: 24,
                 child: SvgPicture.asset('lib/images/recommend/back.svg'),
               ),

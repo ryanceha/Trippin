@@ -67,7 +67,9 @@ class DetailGalleryPage extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    content: Container(
+                    content: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                          16), // Set the border radius here
                       child: Image.asset(
                         images[index],
                         fit: BoxFit.cover,
@@ -76,9 +78,15 @@ class DetailGalleryPage extends StatelessWidget {
                   ),
                 );
               },
-              child: Image.asset(
-                images[index],
-                fit: BoxFit.cover,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(8),
+                  image: DecorationImage(
+                    image: AssetImage(images[index]),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             );
           },

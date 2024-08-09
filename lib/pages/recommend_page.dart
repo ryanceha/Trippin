@@ -289,7 +289,7 @@ class _RecommendPageState extends State<RecommendPage> {
       width: 150,
       height: 200,
       decoration: BoxDecoration(
-        color: Colors.blue[50],
+        color: Color(0XFF3485FF),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Stack(
@@ -639,7 +639,7 @@ class _RecommendPageState extends State<RecommendPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  // const SizedBox(height: 16),
                 ],
               ),
             ),

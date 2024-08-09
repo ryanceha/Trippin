@@ -70,35 +70,40 @@ class _ItineraryPageState extends State<ItineraryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                // redirect to HomePage()
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset('lib/images/recommend/back.svg'),
+              ),
+            ),
+            const SizedBox(width: 20),
+            Text(
+              'Itinerary',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32.0),
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 32.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    width: 12,
-                    height: 24,
-                    child: SvgPicture.asset('lib/images/recommend/back.svg'),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Text(
-                  'Itinerary',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontSize: 24,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

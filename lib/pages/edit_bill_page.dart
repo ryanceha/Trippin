@@ -28,48 +28,50 @@ class _EditBillState extends State<EditBill> {
         items.fold(0, (sum, item) => sum + item['price'] * item['quantity']);
     double totalAmount =
         subtotal; // Update this line as needed for tax, service charge, etc.
-
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                // redirect to HomePage()
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset('lib/images/recommend/back.svg'),
+              ),
+            ),
+            const SizedBox(width: 20),
+            Text(
+              'Edit Bill Items',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32.0),
+          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 32.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      width: 12,
-                      height: 24,
-                      child: SvgPicture.asset('lib/images/recommend/back.svg'),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Text(
-                    'Edit Bill Items',
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 20, top: 5),
-                child: Text(
-                  "You can edit the title, amount and price of each item",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFD9D9D9)),
-                ),
+              Text(
+                "You can edit the title, amount and price of each item",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFD9D9D9)),
               ),
               const SizedBox(height: 24),
               _inputField("Bill Name", _nameController),
@@ -137,7 +139,10 @@ class _EditBillState extends State<EditBill> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SplitBilling(tripTitle: widget.tripTitle, tripImagePath: widget.tripImagePath,)));
+                              builder: (context) => SplitBilling(
+                                    tripTitle: widget.tripTitle,
+                                    tripImagePath: widget.tripImagePath,
+                                  )));
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
