@@ -560,7 +560,7 @@ class _RecommendPageState extends State<RecommendPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Do you like to go culinary?",
+          "Do you like to go?",
           style: TextStyle(
               fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.bold),
         ),
